@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+:root {
+  --color-dark: #2d2330;
+  --color-light: #f7f5ed;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--color-dark);
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.bg-texture-linen {
+  background-image: url("/textures/black-linen.png");
+  background-repeat: repeat;
+  background-size: auto;
+}
+
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+  }
+
+  .custom-scrollbar:hover {
+    scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+  }
+}
+
+.max-h-motifs {
+  max-height: 160px;
+  height: 100%;
+  overflow: hidden;
+}
+.mask-fade-bottom-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+.fade-mask-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(
+    to bottom,
+    rgba(24, 24, 30, 0),
+    rgba(24, 24, 30, 1)
+  );
+  pointer-events: none;
+  z-index: 20;
+}
+.mask-fade-bottom-wrapper {
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 45%, transparent 100%);
+}
+
+@keyframes dreamPresence {
+  0% {
+    transform: translate(0, 0) scale(0.95) rotate(0deg);
+    filter: blur(6px);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(4px, -6px) scale(1) rotate(1deg);
+  }
+  50% {
+    transform: translate(-8px, -10px) scale(1.02) rotate(-1deg);
+  }
+  85% {
+    opacity: 1;
+    filter: blur(1px);
+  }
+  100% {
+    transform: translate(6px, -24px) scale(1.1) rotate(0.5deg);
+    filter: blur(8px);
+    opacity: 0;
+  }
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/fonts/sora-light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/fonts/sora-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Sora";
+  src: url("/fonts/sora-semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/manrope-light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Noto Sans EC ExtraLight";
+  src: url("/fonts/nato-thin.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Manrope";
+  src: url("/fonts/manrope-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Marck Script";
+  src: url("/fonts/marcks-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+.font-sora {
+  font-family: "Sora", "Manrope", sans-serif;
+}
+.font-manrope {
+  font-family: "Manrope", sans-serif;
+}
+.font-marck {
+  font-family: "Marck Script", cursive;
+}
+.font-nato {
+  font-family: "Noto Sans EC ExtraLight", sans-serif;
+}
+
+.animated-dream {
+  position: fixed;
+  pointer-events: none;
+  user-select: none;
+  animation: dreamPresence 42s ease-in-out forwards;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+}
