@@ -9,7 +9,6 @@ import { fetchSnippets } from "../features/snippets/SnippetSlice";
 import { themeSpacing, themeColors, themeRadii } from "../utils/themeTokens";
 import PageHeader from "../layout/PageHeader";
 import PageWrapper from "../layout/PageWrapper";
-import LeftColumn from "../features/snippets/LeftColumn";
 
 export default function Home() {
   const dispatch = useDispatch();
