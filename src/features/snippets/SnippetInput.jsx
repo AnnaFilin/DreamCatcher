@@ -50,28 +50,23 @@ const SnippetInput = () => {
   };
 
   return (
-    <div
-      className={`w-full mb-4 md:mb-2 lg:mb-2  2xl:mb-6
-         `}
-    >
+    <div className="flex flex-col flex-grow">
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
         placeholder="Write your dream..."
         className={`
-          w-full
-           ${themeSpacing.textarea.padding} 
-          ${themeSpacing.textarea.minHeight}
-          ${themeFonts.input}
-          ${themeBorders.input}
-          ${themeBackgrounds.input}
-          ${themeRadii.lg}
-          ${themeEffects.input.base}
-          ${themeEffects.input.hover}
-          ${themeEffects.input.focus}
-        `}
+                w-full h-full resize-none
+                ${themeSpacing.textarea.padding}
+                ${themeFonts.input}
+                ${themeBorders.input}
+                ${themeBackgrounds.input}
+                ${themeRadii.lg}
+                ${themeEffects.input.base}
+                ${themeEffects.input.hover}
+                ${themeEffects.input.focus}
+              `}
       />
-
       {/* Mobile layout */}
       <div className="flex flex-col gap-4 sm:hidden mt-4">
         <div className="flex items-center justify-between gap-12 w-full">
@@ -136,7 +131,6 @@ const ButtonStart = ({ onClick, variant }) => {
           ${themeEffects.iconButton.active}
         `}
       >
-        {/* <MicIcon className="w-8 h-8 sm:w-9 sm:h-9 opacity-90 stroke-[1.4]" /> */}
         <MicIcon className="w-8 h-8 sm:w-9 sm:h-9 opacity-60 group-hover:opacity-90 group-active:opacity-100 transition-opacity duration-200 stroke-[1.4]" />
       </button>
     );
