@@ -47,10 +47,12 @@ const TooltipButton = ({ label, active, onClick, children }) => {
   );
 };
 
-export default function LucidVividnessControls() {
-  const [isLucid, setIsLucid] = useState(false);
-  const [vividness, setVividness] = useState(null);
-
+export default function LucidVividnessControls({
+  isLucid,
+  setIsLucid,
+  vividness,
+  setVividness,
+}) {
   return (
     <div className="flex w-full items-start gap-4 justify-between">
       <TooltipButton

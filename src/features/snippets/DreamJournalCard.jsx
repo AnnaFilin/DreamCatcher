@@ -1,4 +1,4 @@
-import SnippetInput from "./SnippetInput";
+import SnippetInput from "../snippetInput/SnippetInput";
 import { themeFonts, themeColors, themeRadii } from "../../utils/themeTokens";
 import LucidStats from "./LucidStats";
 

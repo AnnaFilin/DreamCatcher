@@ -56,17 +56,17 @@ const SnippetCard = ({ snippet }) => {
       <p
         className="
     text-white/60
-    leading-snug
-    tracking-tight
-    italic
-    font-thin 
-    font-marck
+    font-manrope
+    text-[1.25rem]
+    leading-[1.8rem]
+    tracking-normal
 
-  max-sm:font-manrope
-    max-sm:text-[1.25rem]
-    max-sm:leading-[1.8rem]
-    max-sm:tracking-normal
-    max-sm:italic
+    sm:font-marck
+    sm:text-base
+    sm:leading-snug
+    sm:tracking-tight
+    sm:italic
+    sm:font-thin
   "
       >
         {snippet.text}

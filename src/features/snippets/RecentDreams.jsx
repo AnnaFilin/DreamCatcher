@@ -12,7 +12,7 @@ const RecentDreams = () => {
         <div className="flex-1 overflow-y-auto lg:pr-2 custom-scrollbar">
           <SnippetList limit={5} />
 
-          {/* <div
+          <div
             className="pointer-events-none absolute bottom-[24px] left-[-20px] w-[calc(100%+40px)] h-50 z-10"
             style={{
               background: `
@@ -26,22 +26,6 @@ const RecentDreams = () => {
       )
     `,
               filter: "blur(0.5px)",
-            }}
-          /> */}
-          <div
-            className="pointer-events-none absolute bottom-0 inset-x-0 h-24 md:h-28 lg:h-32 z-20"
-            style={{
-              background: `
-      linear-gradient(
-        to bottom,
-        rgba(45, 35, 48, 0) 0%,
-        rgba(45, 35, 48, 0.2) 30%,
-        rgba(45, 35, 48, 0.5) 60%,
-        rgba(45, 35, 48, 0.8) 90%,
-        rgba(45, 35, 48, 1) 100%
-      )
-    `,
-              filter: "blur(1px)",
             }}
           />
         </div>

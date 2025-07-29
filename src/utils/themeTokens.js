@@ -137,7 +137,9 @@ export const themeSpacing = {
   },
   textarea: {
     // padding: "p-5",
-    padding: "p-4 md:p-5 lg:p-4",
+    // padding: "p-4 md:p-5 lg:p-4",
+    padding:
+      "pt-4 pr-5 pb-5 pl-4 md:pt-5 md:pr-6 md:pb-6 md:pl-5 lg:pt-4 lg:pr-6 lg:pb-6 lg:pl-4",
 
     // minHeight: "min-h-[120px] lg:min-h-[100px] ",
     minHeight:
