@@ -1,11 +1,13 @@
 import { useContext } from "react";
 import { DreamContext } from "../../contexts/DreamContext";
 import LucidDreamIcon from "../icons/LucidDreamIcon";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 // import { themeColors, themeRadii, themeSpacing } from "../../utils/themeTokens";
 
 const SnippetCard = ({ snippet }) => {
   const { setIsModalOpen, setCurrentDream } = useContext(DreamContext);
+  const isLargeScreen = useMediaQuery("(min-width: 640px)");
 
   const dreamDate = snippet.createdAt
     ? new Date(snippet.createdAt).toLocaleDateString("en-GB", {
@@ -53,24 +55,30 @@ const SnippetCard = ({ snippet }) => {
         )}
       </div>
 
-      <p
-        className="
-    text-white/60
-    font-manrope
-    text-[1.25rem]
-    leading-[1.8rem]
-    tracking-normal
-
-    sm:font-marck
-    sm:text-base
-    sm:leading-snug
-    sm:tracking-tight
-    sm:italic
-    sm:font-thin
-  "
-      >
-        {snippet.text}
-      </p>
+      {isLargeScreen ? (
+        <p
+          className="
+      text-white/60
+      leading-snug
+      tracking-tight
+      italic
+      font-thin
+      font-marck
+    "
+        >
+          {snippet.text}
+        </p>
+      ) : (
+        <p
+          className="
+      text-white/60
+      tracking-normal
+      font-manrope italic
+      "
+        >
+          {snippet.text}
+        </p>
+      )}
     </div>
   );
 };
