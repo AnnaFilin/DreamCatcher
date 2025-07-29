@@ -3,6 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { useState } from "react";
 import {
@@ -17,6 +18,13 @@ const Header = () => {
   const [user] = useAuthState(auth);
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
+
+  const { i18n } = useTranslation();
+
+  const toggleLanguage = () => {
+    const newLang = i18n.language === "en" ? "ru" : "en";
+    i18n.changeLanguage(newLang);
+  };
 
   const handleSignOut = async () => {
     await signOut(auth);
@@ -101,6 +109,12 @@ const Header = () => {
               About
             </NavLink>
           </nav>
+          <button
+            onClick={toggleLanguage}
+            className="uppercase text-xs text-white/60 hover:text-white transition tracking-widest"
+          >
+            {i18n.language === "en" ? "RU" : "EN"}
+          </button>
 
           {!user ? (
             <div className="flex items-center gap-4">
@@ -202,6 +216,15 @@ const Header = () => {
               Sign Out
             </button>
           )}
+          <button
+            onClick={() => {
+              toggleLanguage();
+              setMenuOpen(false);
+            }}
+            className="text-white/60 hover:text-white transition text-sm tracking-wider uppercase"
+          >
+            {i18n.language === "en" ? "RU" : "EN"}
+          </button>
         </div>
       )}
     </header>

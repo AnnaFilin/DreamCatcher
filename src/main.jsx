@@ -15,6 +15,7 @@ import RegisterForm from "./features/auth/RegisterForm";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import WelcomePage from "./pages/WelcomePage";
 import "./index.css";
+import "./i18n/i18n";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

@@ -1,64 +1,50 @@
-import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { fetchPublicMotifs } from "../../utils/fetchPublicMotifs";
 import { v4 as uuidv4 } from "uuid";
 
-function truncateTextNicely(text) {
-  const minLength = 30;
-  const maxLength = 50;
-  const targetLength =
-    Math.floor(Math.random() * (maxLength - minLength + 1)) + minLength;
-
-  if (text.length <= targetLength) return text;
-
-  const cut = text.slice(0, targetLength);
-  const lastSpace = cut.lastIndexOf(" ");
-  const cleanCut = lastSpace !== -1 ? cut.slice(0, lastSpace) : cut;
-
-  return cleanCut + "…";
-}
-
-export default function FloatingDreamTextsV2() {
-  const snippets = useSelector((state) => state.snippets.snippets);
-  const allTexts = snippets
-    .filter((s) => !!s.text)
-    .map((s) => s.text.trim())
-    .filter(Boolean);
-
+export default function FloatingPublicMotifs({ setSelectedMotif }) {
+  const [allMotifs, setAllMotifs] = useState([]);
   const [floatingItems, setFloatingItems] = useState([]);
+
+  useEffect(() => {
+    fetchPublicMotifs().then((motifs) => {
+      const cleaned = motifs
+        .map((m) => ({
+          id: m.id?.trim(),
+          meaning: m.meaning?.trim(),
+          arch: m.arch?.trim(),
+        }))
+        .filter((m) => m.id);
+      setAllMotifs(cleaned);
+    });
+  }, []);
 
   useEffect(() => {
     const timeoutRef = { current: null };
 
     const spawn = () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      console.log("spawning new");
 
       setFloatingItems((prev) => {
         if (prev.length >= 10) return prev;
 
         const visibleTexts = prev.map((item) => item.text);
-        const available = allTexts.filter((t) => !visibleTexts.includes(t));
+        const available = allMotifs.filter((t) => !visibleTexts.includes(t));
         if (!available.length) return prev;
 
-        const newText = truncateTextNicely(
-          available[Math.floor(Math.random() * available.length)]
-        );
-
-        const dx = Math.random() * 200 - 100;
-        const dy = Math.random() * 300 - 150;
+        const newMotif =
+          available[Math.floor(Math.random() * available.length)];
 
         const newItem = {
           id: uuidv4(),
-          text: newText,
+          text: newMotif.id,
           top: Math.random() * 80,
           left: Math.random() * 80,
           amplitudeX: Math.random() * 3 + 1.5,
           amplitudeY: Math.random() * 3 + 1.5,
           phaseShift: Math.random() * 2 * Math.PI,
-
-          dx,
-          dy,
           fontSize: Math.random() * 0.5 + 1,
+          motif: newMotif,
         };
 
         return [...prev, newItem];
@@ -67,26 +53,33 @@ export default function FloatingDreamTextsV2() {
       timeoutRef.current = setTimeout(spawn, 3000 + Math.random() * 3000);
     };
 
-    timeoutRef.current = setTimeout(spawn, 4000);
+    timeoutRef.current = setTimeout(spawn, 3000);
 
     return () => clearTimeout(timeoutRef.current);
-  }, [allTexts]);
+  }, [allMotifs]);
 
   const handleRemove = (id) => {
-    console.log("removing", id);
     setFloatingItems((prev) => prev.filter((item) => item.id !== id));
   };
 
   return (
     <>
       {floatingItems.map((item) => (
-        <FloatingText key={item.id} item={item} onRemove={handleRemove} />
+        <FloatingMotifText
+          key={item.id}
+          item={item}
+          onRemove={handleRemove}
+          onSelect={() => {
+            setSelectedMotif(item.motif);
+            setTimeout(() => setSelectedMotif(null), 6000);
+          }}
+        />
       ))}
     </>
   );
 }
 
-function FloatingText({ item, onRemove }) {
+function FloatingMotifText({ item, onRemove, onSelect }) {
   const [style, setStyle] = useState({
     top: `${item.top}%`,
     left: `${item.left}%`,
@@ -159,24 +152,24 @@ function FloatingText({ item, onRemove }) {
 
   return (
     <div
-      className=" leading-snug
-  tracking-tight
-  italic
- font-thin  font-marck"
+      className="leading-snug tracking-tight italic font-thin font-marck"
       style={{
         ...style,
         position: "fixed",
-        color: "rgba(255, 255, 255, 0.6)",
+        color: "rgba(255, 255, 255, 0.2)",
         textShadow: `
-    0 0 4px rgba(255, 255, 255, 0.3),
-    0 0 10px rgba(255, 255, 255, 0.2)
-  `,
-        pointerEvents: "none",
+          0 0 4px rgba(255, 255, 255, 0.15),
+          0 0 10px rgba(255, 255, 255, 0.1)
+        `,
+        pointerEvents: "auto",
         userSelect: "none",
         whiteSpace: "nowrap",
         transition: "opacity 1.5s ease",
-        filter: "blur(0.25px)",
+        filter: "blur(0.3px)",
+        zIndex: 10,
       }}
+      onMouseEnter={onSelect}
+      onTouchStart={onSelect}
     >
       {item.text}
     </div>
