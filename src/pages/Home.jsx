@@ -30,7 +30,7 @@ export default function Home() {
 
           <DreamJournalCard />
 
-          <div className="basis-[25%] min-h-[100px] max-h-[25vh]">
+          <div className="basis-[25%] min-h-[100px] max-h-[25vh] hidden lg:block">
             <div className="relative w-full h-full">
               <div className="absolute -inset-2 bg-white opacity-5 blur-2xl rounded-2xl pointer-events-none z-0" />
               <div
