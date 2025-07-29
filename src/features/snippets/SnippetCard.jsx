@@ -62,11 +62,11 @@ const SnippetCard = ({ snippet }) => {
     font-thin 
     font-marck
 
-    max-sm:font-normal
+  max-sm:font-manrope
     max-sm:text-[1.25rem]
     max-sm:leading-[1.8rem]
-    max-sm:tracking-wide
-    max-sm:pr-1
+    max-sm:tracking-normal
+    max-sm:italic
   "
       >
         {snippet.text}
