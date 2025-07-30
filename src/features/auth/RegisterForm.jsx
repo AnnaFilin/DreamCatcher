@@ -22,7 +22,7 @@ const RegisterForm = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    // console.log("submit");
+
     setError("");
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -35,7 +35,6 @@ const RegisterForm = () => {
       });
       navigate("/");
     } catch (err) {
-      // console.error(err);
       setError(err.message);
     }
   };

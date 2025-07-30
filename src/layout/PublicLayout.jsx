@@ -9,7 +9,7 @@ const PublicLayout = () => {
       <div className="absolute top-1/2 left-1/3 w-[400px] h-[400px] rounded-full bg-indigo-500 opacity-20 blur-[150px] pointer-events-none z-10"></div>
 
       <Header />
-      <main className="flex-1  overflow-hidden">
+      <main className="flex-1  overflow-hidden pt-16 md:pt-24">
         <Outlet />
       </main>
       <footer

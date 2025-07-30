@@ -1,5 +1,4 @@
 import FloatingDreamTextsV2 from "./NewFloatingTexts";
-// import FloatingDreamTexts from "./FloatingDreamTexts3";
 
 export default function AnimatedDreams() {
   return (

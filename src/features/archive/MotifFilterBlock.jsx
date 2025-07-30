@@ -24,13 +24,6 @@ const MotifFilterBlock = ({
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-  //  pt-6
-  {
-    /*  text-white/80 text-xl md:text-2xl */
-  }
-  {
-    /* <h2 className={`${themeFonts.title}`}>Dream Archive</h2> */
-  }
 
   return (
     <div className="mx-auto pb-4 md:pb-6">

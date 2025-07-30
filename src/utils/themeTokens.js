@@ -136,12 +136,9 @@ export const themeSpacing = {
     },
   },
   textarea: {
-    // padding: "p-5",
-    // padding: "p-4 md:p-5 lg:p-4",
     padding:
       "pt-4 pr-5 pb-5 pl-4 md:pt-5 md:pr-6 md:pb-6 md:pl-5 lg:pt-4 lg:pr-6 lg:pb-6 lg:pl-4",
 
-    // minHeight: "min-h-[120px] lg:min-h-[100px] ",
     minHeight:
       "min-h-[100px] md:min-h-[120px] lg:min-h-[110px] xl:min-h-[100px]",
   },
@@ -153,12 +150,12 @@ export const themeSpacing = {
     },
   },
   motifs: {
-    height: `//h-6 md:h-8
-    h-20       // 80px — мобилки
-    md:h-24    // 96px — планшеты
-    lg:h-28    // 112px — десктоп
-    xl:h-32    // 128px — широкий экран
-    2xl:h-48   // 144px — очень широкий
+    height: `
+    h-20       
+    md:h-24    
+    lg:h-28    
+    xl:h-32    
+    2xl:h-48   
   `,
   },
 

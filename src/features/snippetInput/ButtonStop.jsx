@@ -41,6 +41,5 @@ const ButtonStop = ({ onClick, variant }) => {
     </button>
   );
 };
-// ${themeRadii.md}
 
 export default ButtonStop;

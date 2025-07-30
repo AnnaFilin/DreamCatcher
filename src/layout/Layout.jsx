@@ -33,9 +33,10 @@ const Layout = () => {
 
       <div className="relative z-20 flex flex-col flex-1">
         <Header />
-        <main className="flex-1 overflow-hidden">
+        <main className="flex-1 overflow-hidden pt-16 md:pt-24">
           <Outlet />
         </main>
+
         <DreamModal />
         <footer
           className="

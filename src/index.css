@@ -59,6 +59,10 @@ main {
   .scrollbar-stable {
     scrollbar-gutter: stable;
   }
+
+  .max-h-screen-safe {
+    max-height: calc(100vh - 100px);
+  }
 }
 
 .max-h-motifs {

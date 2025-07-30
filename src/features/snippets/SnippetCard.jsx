@@ -3,8 +3,6 @@ import { DreamContext } from "../../contexts/DreamContext";
 import LucidDreamIcon from "../icons/LucidDreamIcon";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 
-// import { themeColors, themeRadii, themeSpacing } from "../../utils/themeTokens";
-
 const SnippetCard = ({ snippet }) => {
   const { setIsModalOpen, setCurrentDream } = useContext(DreamContext);
   const isLargeScreen = useMediaQuery("(min-width: 640px)");
