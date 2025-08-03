@@ -2,10 +2,10 @@ import { NavLink } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "../firebase/firebase";
 import { signOut } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   themeFonts,
   themeColors,
@@ -13,12 +13,20 @@ import {
   themeSpacing,
 } from "../utils/themeTokens";
 import LoginButton from "../features/auth/LoginButton";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useMediaQuery } from "../hooks/useMediaQuery";
+import { DreamContext } from "../contexts/DreamContext";
 
 const Header = () => {
   const [user] = useAuthState(auth);
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
+  const { isModalOpen, setIsModalOpen } = useContext(DreamContext);
+  const isMobile = useMediaQuery("(max-width: 639px)");
+  const location = useLocation();
+
+  const { t } = useTranslation();
   const { i18n } = useTranslation();
 
   const toggleLanguage = () => {
@@ -45,20 +53,27 @@ const Header = () => {
     backdrop-blur-md
     bg-black/30
     shadow-[0_1px_3px_rgba(255,255,255,0.05)]
-    z-50
+    z-100
   "
     >
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         <NavLink
           to={user ? "/" : "/welcome"}
           className={themeFonts.logo}
-          onClick={() => setMenuOpen(false)}
+          onClick={(e) => {
+            setMenuOpen(false);
+
+            if (location.pathname === "/" && isModalOpen && isMobile) {
+              e.preventDefault();
+              setIsModalOpen(false);
+            }
+          }}
         >
           Dream Catcher
         </NavLink>
 
-        <div className="hidden lg:flex items-center gap-8">
-          <nav className="flex gap-10 text-xs tracking-wider uppercase font-sans text-white/80">
+        <div className="hidden lg:flex items-center gap-5">
+          <nav className="flex gap-5 text-xs tracking-wider uppercase font-sans text-white/80">
             {user && (
               <NavLink
                 to="/"
@@ -73,7 +88,7 @@ const Header = () => {
                   `
                 }
               >
-                Home
+                {t("nav.home")}
               </NavLink>
             )}
             {user && (
@@ -90,7 +105,7 @@ const Header = () => {
                 `
                 }
               >
-                Archive
+                {t("nav.archive")}
               </NavLink>
             )}
             <NavLink
@@ -106,18 +121,15 @@ const Header = () => {
               `
               }
             >
-              About
+              {t("nav.about")}
             </NavLink>
           </nav>
-          <button
-            onClick={toggleLanguage}
-            className="uppercase text-xs text-white/60 hover:text-white transition tracking-widest"
-          >
-            {i18n.language === "en" ? "RU" : "EN"}
-          </button>
+          <div className="ml-6">
+            <LanguageSwitcher />
+          </div>
 
           {!user ? (
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <NavLink
                 to="/register"
                 className="
@@ -125,25 +137,24 @@ const Header = () => {
                   text-white/70 hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]
                 "
               >
-                Sign Up
+                {t("buttons.sign_up")}
               </NavLink>
               <LoginButton />
             </div>
           ) : (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center ">
               <button
                 onClick={handleSignOut}
                 className={`
                   ${themeFonts.tag}
-                  ${themeColors.glowSoft}
                   ${themeSpacing.button}
                   ${themeEffects.button.base}
                   ${themeEffects.button.hover}
                   ${themeEffects.button.active}
-                  backdrop-blur-sm
+                  ${themeColors.glowSoft}
                   `}
               >
-                Sign Out
+                {t("buttons.sign_out")}
               </button>
 
               <img
@@ -182,10 +193,17 @@ const Header = () => {
           {user && (
             <NavLink
               to="/"
-              onClick={() => setMenuOpen(false)}
               className="hover:text-white transition"
+              onClick={(e) => {
+                setMenuOpen(false);
+
+                if (location.pathname === "/" && isModalOpen && isMobile) {
+                  e.preventDefault();
+                  setIsModalOpen(false);
+                }
+              }}
             >
-              Home
+              {t("nav.home")}
             </NavLink>
           )}
           {user && (
@@ -194,7 +212,7 @@ const Header = () => {
               onClick={() => setMenuOpen(false)}
               className="hover:text-white transition"
             >
-              Archive
+              {t("nav.archive")}
             </NavLink>
           )}
           <NavLink
@@ -202,7 +220,7 @@ const Header = () => {
             onClick={() => setMenuOpen(false)}
             className="hover:text-white transition"
           >
-            About
+            {t("nav.about")}
           </NavLink>
 
           {user && (
@@ -213,7 +231,7 @@ const Header = () => {
               }}
               className="text-white/60 hover:text-white transition text-sm tracking-wider uppercase"
             >
-              Sign Out
+              {t("buttons.sign_out")}
             </button>
           )}
           <button

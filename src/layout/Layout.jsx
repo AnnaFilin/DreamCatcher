@@ -6,9 +6,13 @@ import LoginButton from "../features/auth/LoginButton";
 import AnimatedDreams from "../features/animations/AnimatedDreams";
 import DreamModal from "../features/dream/DreamModal";
 import useUserSync from "../hooks/useUserSync";
+import ToastContainerWrapper from "./ToastContainerWrapper";
+import { useTranslation } from "react-i18next";
 
 const Layout = () => {
   const [user, loading] = useAuthState(auth);
+  const { i18n } = useTranslation();
+  const isHebrew = i18n.language === "he";
 
   useUserSync();
 
@@ -22,7 +26,12 @@ const Layout = () => {
     );
 
   return (
-    <div className="relative min-h-screen flex flex-col overflow-hidden text-gray-100 font-sora">
+    <div
+      className={`
+        relative min-h-screen flex flex-col overflow-hidden text-gray-100
+        ${isHebrew ? "font-rubik" : "font-sora"}
+      `}
+    >
       <div className="absolute inset-0 bg-[--color-background] bg-texture-linen"></div>
 
       <div className="absolute top-1/2 left-1/3 w-[400px] h-[400px] rounded-full bg-indigo-500 opacity-20 blur-[150px] pointer-events-none z-10"></div>
@@ -38,6 +47,8 @@ const Layout = () => {
         </main>
 
         <DreamModal />
+
+        <ToastContainerWrapper />
         <footer
           className="
             w-full

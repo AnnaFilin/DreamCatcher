@@ -1,17 +1,20 @@
 import DreamDate from "./DreamDate";
 import DreamTextBlock from "./DreamTextBlock";
 import MotifsList from "./MotifsList";
-import InterpretationBlock from "./InterpretationBlock";
-import GenerateButton from "./GenerateButton";
+import { useContext } from "react";
+
+import InterpretationControls from "./InterpretationControls";
+import { modalContentPaddingTop } from "../../utils/themeTokens";
+import { DreamContext } from "../../contexts/DreamContext";
 
 const DreamModalMobile = ({
   currentDream,
-  setIsModalOpen,
   handleGenerate,
   isGenerating,
-  interpretation,
+  interpretations,
   dreamDate,
 }) => {
+  const { setIsModalOpen } = useContext(DreamContext);
   if (!currentDream) return null;
 
   return (
@@ -26,18 +29,15 @@ const DreamModalMobile = ({
         <DreamDate date={dreamDate} />
       </div>
 
-      <div className="pt-4 pb-24 px-4 space-y-6">
+      <div className={`${modalContentPaddingTop} pb-24 px-4 space-y-6`}>
         <DreamTextBlock text={currentDream.text} />
         <MotifsList motifs={currentDream.motifs} />
-        <InterpretationBlock interpretation={interpretation} />
-        {!interpretation && (
-          <div className="text-center">
-            <GenerateButton
-              onClick={handleGenerate}
-              isGenerating={isGenerating}
-            />
-          </div>
-        )}
+
+        <InterpretationControls
+          interpretations={interpretations}
+          handleGenerate={handleGenerate}
+          isGenerating={isGenerating}
+        />
       </div>
     </div>
   );

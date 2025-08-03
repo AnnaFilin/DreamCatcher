@@ -2,11 +2,15 @@ import SnippetList from "./SnippetList";
 import TotalCounter from "./TotalCounter";
 import { Link } from "react-router-dom";
 import { themeFonts } from "../../utils/themeTokens";
+import { useTranslation } from "react-i18next";
 
 const RecentDreams = () => {
+  const { t } = useTranslation();
   return (
     <div className=" flex flex-col h-full space-y-6">
-      <h2 className={`${themeFonts.sectionTitle} `}>Recent Dreams</h2>
+      <h2 className={`${themeFonts.sectionTitle} `}>
+        {t("recent_dreams.title")}
+      </h2>
 
       <div className="flex flex-col flex-1 overflow-hidden relative">
         <div className="flex-1 overflow-y-auto lg:pr-2 custom-scrollbar">
@@ -37,7 +41,7 @@ const RecentDreams = () => {
             to="/archive"
             className={`${themeFonts.smallInfo} hover:text-white/80 transition-colors`}
           >
-            See all dreams →
+            {t("recent_dreams.link")}
           </Link>
         </div>
       </div>

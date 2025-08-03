@@ -7,10 +7,13 @@ import { useEffect } from "react";
 import { fetchMotifs } from "../features/motifs/MotifsSlice";
 import { fetchSnippets } from "../features/snippets/SnippetSlice";
 import { themeSpacing, themeColors, themeRadii } from "../utils/themeTokens";
+import { useTranslation } from "react-i18next";
+
 import PageHeader from "../layout/PageHeader";
 import PageWrapper from "../layout/PageWrapper";
 
 export default function Home() {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -20,9 +23,8 @@ export default function Home() {
 
   return (
     <PageWrapper>
-      <PageHeader title="Sleep Log" />
+      <PageHeader title={t("home.title")} />
       <div className="grid grid-cols-1 lg:grid-cols-[1.35fr_0.95fr] gap-6 xl:gap-10 pb-2 md:pb-4 lg:pb-4 xl:pb-4">
-        {/* <div className="flex flex-col h-full gap-4 xl:gap-6 2xl:gap-8"> */}
         <div className="flex flex-col h-full gap-6">
           <div className="block md:hidden mb-3">
             <LucidStats />

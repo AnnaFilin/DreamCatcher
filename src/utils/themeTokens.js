@@ -14,15 +14,16 @@ export const themeColors = {
 
 export const themeEffects = {
   input: {
-    base: "transition duration-300 ease-in-out shadow-md",
-    hover: "hover:shadow-lg hover:brightness-105",
-    focus: "focus:outline-none focus:ring-2 focus:ring-white/30",
+    base: "transition duration-300 ease-in-out shadow-[0_2px_6px_rgba(255,255,255,0.05)]",
+    hover:
+      "hover:brightness-105 hover:shadow-[0_2px_8px_rgba(255,255,255,0.06)]",
+    focus: "focus:outline-none focus:ring-2 focus:ring-white/20",
   },
 
   button: {
     base: "transition duration-200 ease-in-out",
-    hover: "hover:text-white hover:scale-105",
-    active: "active:bg-white/20",
+    hover: "hover:text-white hover:scale-102",
+    active: "active:bg-white/10",
   },
   capsule: {
     base: "transition duration-200 ease-in-out",
@@ -89,7 +90,7 @@ export const themeBackgrounds = {
   input: "bg-white/5",
   block: "bg-neutral-800/20",
 };
-
+export const modalContentPaddingTop = "pt-24";
 export const themeSpacing = {
   section: {
     paddingX: {

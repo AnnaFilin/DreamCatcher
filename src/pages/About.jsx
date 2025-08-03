@@ -1,13 +1,24 @@
 import { themeFonts } from "../utils/themeTokens";
+import { useTranslation } from "react-i18next";
+
 import PageHeader from "../layout/PageHeader";
 import PageWrapper from "../layout/PageWrapper";
 
 const About = () => {
+  const { t } = useTranslation();
+
   return (
     <PageWrapper>
-      <PageHeader title=" About Dream Catcher" />
+      <PageHeader title={t("about.title")} />
 
       <div className={`${themeFonts.subtitle} space-y-4`}>
+        {t("about.description")
+          .split("\n\n")
+          .map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
+          ))}
+      </div>
+      {/* <div className={`${themeFonts.subtitle} space-y-4`}>
         <p>
           <strong>Dream Snippets</strong> is a digital space for quietly
           observing the language of dreams. It’s designed to help you record
@@ -50,7 +61,7 @@ const About = () => {
           own unconscious — and perhaps, over time, begin to see yourself more
           clearly.
         </p>
-      </div>
+      </div> */}
     </PageWrapper>
   );
 };

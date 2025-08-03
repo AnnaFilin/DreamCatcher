@@ -35,7 +35,7 @@ export const useVoiceRecorder = ({ onResult, useMock = false }) => {
         console.log("🎙️ Audio Blob:", audioBlob);
 
         if (audioBlob.size < 2000) {
-          alert("Запись слишком короткая или пустая.");
+          alert("Record is too short or empty");
           return;
         }
 
@@ -62,7 +62,7 @@ export const useVoiceRecorder = ({ onResult, useMock = false }) => {
           if (data.text) {
             onResult(data.text);
           } else {
-            alert("❌ Whisper вернул пусто");
+            alert("❌ Whisper return empty");
           }
         } catch (error) {
           console.error("Whisper API error:", error);

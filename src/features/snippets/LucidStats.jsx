@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
 const MoonIcon = () => (
@@ -18,6 +19,7 @@ const MoonIcon = () => (
 );
 
 const LucidStats = () => {
+  const { t } = useTranslation();
   const snippets = useSelector((state) => state.snippets.snippets);
   const total = snippets.length;
   const lucid = snippets.filter((s) => s.isLucid).length;
@@ -27,12 +29,10 @@ const LucidStats = () => {
       {total > 0 ? (
         <>
           <MoonIcon />
-          <span>
-            {lucid} of {total} dreams — Lucid
-          </span>
+          <span>{t("lucid_stats.label", { lucid, total })}</span>
         </>
       ) : (
-        `No dreams yet.`
+        <span>{t("lucid_stats.empty")}</span>
       )}
     </div>
   );

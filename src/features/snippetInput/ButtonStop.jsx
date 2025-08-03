@@ -37,7 +37,7 @@ const ButtonStop = ({ onClick, variant }) => {
         `}
     >
       <MicIcon className="w-5 h-5 opacity-80" />
-      Stop
+      t("buttons.stop")
     </button>
   );
 };

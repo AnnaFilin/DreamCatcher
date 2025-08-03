@@ -1,11 +1,13 @@
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import SnippetCard from "../features/snippets/SnippetCard";
 import MotifFilterBlock from "../features/archive/MotifFilterBlock";
 import PageHeader from "../layout/PageHeader";
 import PageWrapper from "../layout/PageWrapper";
 
 const ArchivePage = () => {
+  const { t } = useTranslation();
   const allSnippets = useSelector((state) => state.snippets.snippets);
 
   const [lucidOnly, setLucidOnly] = useState(false);
@@ -43,7 +45,7 @@ const ArchivePage = () => {
 
   return (
     <PageWrapper>
-      <PageHeader title="Dream Archive" />
+      <PageHeader title={t("archive.title")} />
 
       <MotifFilterBlock
         lucidOnly={lucidOnly}

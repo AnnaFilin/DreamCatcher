@@ -14,10 +14,14 @@ import LucidVividnessControls from "./LucidVividnessControls";
 import ButtonSave from "./ButtonSave";
 import ButtonStart from "./ButtonStart";
 import ButtonStop from "./ButtonStop";
+import Spinner from "../icons/Spinner";
 import { useVoiceRecorder } from "../../hooks/useVoiceRecorder";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const SnippetInput = () => {
+  const { t } = useTranslation();
   const [text, setText] = useState("");
   const [isLucid, setIsLucid] = useState(false);
   const [vividness, setVividness] = useState("");
@@ -34,24 +38,37 @@ const SnippetInput = () => {
 
   const handleAdd = async () => {
     if (!text.trim()) {
-      console.warn("⚠️ Text is empty!");
+      toast.warn("Dream text is empty.");
       return;
     }
-    setIsSaving(true);
-    await dispatch(
-      addSnippet({
-        text,
-        isLucid,
-        vividness,
-        knownMotifs: knownMotifs || [],
-      })
-    );
-    await dispatch(fetchMotifs());
 
-    setIsSaving(false);
-    setText("");
-    setIsLucid(false);
-    setVividness("");
+    try {
+      setIsSaving(true);
+      await dispatch(
+        addSnippet({
+          text,
+          isLucid,
+          vividness,
+          knownMotifs: knownMotifs || [],
+        })
+      );
+      await dispatch(fetchMotifs());
+
+      setText("");
+      setIsLucid(false);
+      setVividness("");
+
+      toast.success("Dream saved successfully.", {
+        icon: false,
+      });
+    } catch (error) {
+      toast.error("Failed to save the dream.", {
+        icon: false,
+      });
+      console.error("Save error:", error);
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -59,7 +76,7 @@ const SnippetInput = () => {
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="Write your dream..."
+        placeholder={t("dream_input.placeholder")}
         className={`
                 w-full h-full resize-none custom-scrollbar scrollbar-stable  overflow-y-auto
                 ${themeSpacing.textarea.padding}

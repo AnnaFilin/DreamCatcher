@@ -12,6 +12,7 @@ import {
   themeEffects,
 } from "../../utils/themeTokens";
 import LoginButton from "./LoginButton";
+import { useTranslation } from "react-i18next";
 
 const RegisterForm = () => {
   const [email, setEmail] = useState("");
@@ -19,6 +20,7 @@ const RegisterForm = () => {
   const [displayName, setDisplayName] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -56,7 +58,10 @@ const RegisterForm = () => {
           shadow-xl text-white
         `}
       >
-        <h2 className={`${themeFonts.title} mb-6`}>Create an Account</h2>
+        <h2 className={`${themeFonts.title} mb-6`}>
+          {t("form.create_account")}
+          {/* Create an Account */}
+        </h2>
 
         <div className="flex flex-col gap-4">
           <input
@@ -125,14 +130,17 @@ const RegisterForm = () => {
               mt-2
             `}
           >
-            Sign Up
+            {/* Sign Up */}
+            {t("buttons.sign_up")}
           </button>
         </div>
 
         {error && <p className="text-rose-400 text-sm mt-4">{error}</p>}
 
         <p className={`${themeFonts.smallInfo} mt-6 text-center`}>
-          Already have an account? <LoginButton />
+          {/* Already have an account?  */}
+          {t("form.already_have_account")}
+          <LoginButton />
         </p>
       </form>
     </div>

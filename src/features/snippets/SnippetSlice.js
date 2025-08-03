@@ -5,6 +5,8 @@ import {
   setDoc,
   getDoc,
   getDocs,
+  updateDoc,
+  arrayUnion,
   deleteDoc,
   doc,
   query,
@@ -37,11 +39,35 @@ export const fetchSnippets = createAsyncThunk(
         isLucid: data.isLucid || false,
         vividness: data.vividness || "",
         motifs: data.motifs || [],
+        interpretations: data.interpretations || [],
+
         createdAt: data.createdAt?.toMillis?.() || Date.now(),
       });
     });
 
     return snippets;
+  }
+);
+
+export const saveInterpretation = createAsyncThunk(
+  "snippets/saveInterpretation",
+  async ({ snippetId, interpretationText }) => {
+    const uid = auth.currentUser?.uid;
+    if (!uid) throw new Error("Not authenticated");
+
+    const snippetRef = doc(db, "users", uid, "snippets", snippetId);
+
+    const newInterpretation = {
+      id: Date.now().toString(),
+      text: interpretationText,
+      createdAt: new Date().toISOString(), // string вместо serverTimestamp
+    };
+
+    await updateDoc(snippetRef, {
+      interpretations: arrayUnion(newInterpretation),
+    });
+
+    return { snippetId, interpretation: newInterpretation };
   }
 );
 
@@ -130,6 +156,16 @@ const snippetSlice = createSlice({
       })
       .addCase(addSnippet.fulfilled, (state, action) => {
         state.snippets.push(action.payload);
+      })
+      .addCase(saveInterpretation.fulfilled, (state, action) => {
+        const { snippetId, interpretation } = action.payload;
+        const target = state.snippets.find((s) => s.id === snippetId);
+        if (target) {
+          target.interpretations = [
+            ...(target.interpretations || []),
+            interpretation,
+          ].slice(-3);
+        }
       })
       .addCase(deleteSnippet.fulfilled, (state, action) => {
         state.snippets = state.snippets.filter(

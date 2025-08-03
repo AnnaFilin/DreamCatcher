@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import {
   themeFonts,
   themeColors,
@@ -24,6 +25,7 @@ const MicIcon = ({ className }) => (
 );
 
 const ButtonStart = ({ onClick, variant }) => {
+  const { t } = useTranslation();
   if (variant === "icon") {
     return (
       <button
@@ -56,7 +58,7 @@ const ButtonStart = ({ onClick, variant }) => {
       `}
     >
       <MicIcon className="w-5 h-5 opacity-80" />
-      Record
+      {t("buttons.record")}
     </button>
   );
 };

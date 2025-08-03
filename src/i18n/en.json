@@ -1,7 +1,48 @@
 {
-  "welcome.title": "Dream Catcher",
-  "welcome.description": "An ambient space for logging your dreams, exploring unconscious patterns, and receiving AI interpretations.",
-  "welcome.signup": "Sign up",
-  "welcome.signin": "Sign in",
-  "welcome.already": "Already have an account?"
+  "archive.title": "Dream Archive",
+  "home.title": "Sleep Log",
+  "dream_journal.title": "Dream Journal",
+  "dream_journal.description": "Write down your dreams right after waking up. The more often you do it, the better you’ll remember them — and the easier it becomes to recognize when you're dreaming.",
+  "lucid_stats.label": "{{lucid}} of {{total}} dreams — Lucid",
+  "lucid_stats.empty": "No dreams yet.",
+  "recent_dreams.title": "Recent Dreams",
+  "recent_dreams.link": "See all dreams →",
+  "total_counter.label": "Total: {{count}} dreams saved",
+  "dream_input.placeholder": "Write your dream...",
+
+  "buttons.save": "Save",
+  "buttons.record": "Record",
+  "buttons.stop": "Stop",
+  "buttons.generate": "Generate Interpretation",
+  "buttons.showInterpretations": "Show {{count}} interpretation",
+  "buttons.hideInterpretations": "Hide interpretations",
+  "buttons.showInterpretations_plural": "Show {{count}} interpretations",
+  "filters.show": "Show Filters",
+  "filters.hide": "Hide Filters",
+  "filters.reset": "Reset",
+  "input.placeholder": "Write your dream...",
+  "input.vividness": "Select dream vividness",
+  "input.lucid": "Lucid?",
+  "search.placeholder": "Search...",
+
+  "buttons.sign_in": "Sign In",
+  "buttons.sign_up": "Sign Up",
+  "buttons.sign_out": "Sign Out",
+  "form.create_account": "Create an Account",
+  "form.name": "Your name",
+  "form.email": "Email",
+  "form.password": "Password",
+  "form.already_have_account": "Already have an account?",
+  "nav.home": "Home",
+  "nav.archive": "Archive",
+  "nav.about": "About",
+  "language.en": "EN",
+  "language.ru": "RU",
+  "language.he": "HE",
+
+  "labels.interpretation": "Interpretation",
+  "about": {
+    "title": "Dreamcatcher",
+    "description": "Dreaming is a form of reality with a different logic. Perception remains active: feelings, memory, intention. Space and time reorganize, images take on autonomy. Sometimes states arise in which the familiar “I” recedes — a person becomes a tree, a faceless figure, a motion. Even when these experiences aren’t remembered, they continue to act — in the body, in perception, in the version of self that wakes up.\n\nDreamcatcher is a tool for capturing dreams and noticing recurring motifs and inner states. Keeping a dream journal regularly increases awareness of the inner world and makes lucid dreaming more likely. Where recognition appears, so does the chance to remember that you’re dreaming — and to take hold of the fabric of the dream itself. In this state, anything becomes possible: reshaping space, exploring, building your own reality. The experience affects not only the night, but deepens attention during the day.\n\nThe AI in Dreamcatcher traces connections, repetitions, emotional patterns, and accumulations of meaning. It also offers interpretations inspired by Jung’s archetypal approach — as a way to listen to how the unconscious speaks through symbols. Dreams draw nearer. Life becomes more distinct."
+  }
 }
