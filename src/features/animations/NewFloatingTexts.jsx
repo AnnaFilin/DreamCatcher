@@ -31,7 +31,6 @@ export default function FloatingDreamTextsV2() {
 
     const spawn = () => {
       if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      console.log("spawning new");
 
       setFloatingItems((prev) => {
         if (prev.length >= 10) return prev;
@@ -73,7 +72,6 @@ export default function FloatingDreamTextsV2() {
   }, [allTexts]);
 
   const handleRemove = (id) => {
-    console.log("removing", id);
     setFloatingItems((prev) => prev.filter((item) => item.id !== id));
   };
 

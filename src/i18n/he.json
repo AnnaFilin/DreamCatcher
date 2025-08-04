@@ -1,4 +1,10 @@
 {
+  "welcome.title": "לוכד החלומות",
+  "welcome.description": "מרחב רגוע לרישום חלומות, חקירת דפוסים תת-מודעים וקבלת פרשנויות מהבינה המלאכותית.",
+  "welcome.signup": "הירשמו",
+  "welcome.signin": "התחברו",
+  "welcome.already": "כבר יש לכם חשבון?",
+
   "archive.title": "ארכיון חלומות",
   "home.title": "יומן שינה",
   "dream_journal.title": "יומן חלומות",

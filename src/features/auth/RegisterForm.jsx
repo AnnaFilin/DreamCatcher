@@ -58,9 +58,8 @@ const RegisterForm = () => {
           shadow-xl text-white
         `}
       >
-        <h2 className={`${themeFonts.title} mb-6`}>
+        <h2 className={`${themeFonts.sectionTitle} mb-6`}>
           {t("form.create_account")}
-          {/* Create an Account */}
         </h2>
 
         <div className="flex flex-col gap-4">
@@ -130,16 +129,20 @@ const RegisterForm = () => {
               mt-2
             `}
           >
-            {/* Sign Up */}
             {t("buttons.sign_up")}
           </button>
         </div>
 
         {error && <p className="text-rose-400 text-sm mt-4">{error}</p>}
 
-        <p className={`${themeFonts.smallInfo} mt-6 text-center`}>
-          {/* Already have an account?  */}
+        {/* <p className={`${themeFonts.smallInfo} mt-6 text-center`}>
           {t("form.already_have_account")}
+          <LoginButton />
+        </p> */}
+        <p
+          className={`${themeFonts.smallInfo} mt-6 text-center flex flex-wrap justify-center items-center gap-1 sm:gap-2`}
+        >
+          <span>{t("form.already_have_account")}</span>
           <LoginButton />
         </p>
       </form>

@@ -15,7 +15,6 @@ const GenerateButton = ({ onClick, isGenerating }) => {
   hover:bg-white/10 hover:text-white active:bg-white/10
   sm:w-auto sm:px-6 sm:py-2 sm:text-xs sm:uppercase sm:tracking-wider sm:text-white/60 sm:border-none
 "
-      // className="text-sm font-medium tracking-wide uppercase text-white/60 hover:text-white/90 transition"
     >
       {t("buttons.generate")}
     </button>

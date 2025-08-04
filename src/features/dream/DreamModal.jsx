@@ -1,7 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { DreamContext } from "../../contexts/DreamContext";
 import { db } from "../../firebase/firebase";
+// TEMP: using mock instead of real OpenAI call for testing
 // import { generateDreamInterpretation } from "../../utils/generateDreamInterpretation";
+import { generateDreamInterpretationMock } from "../../utils/generateDreamInterpretationMock";
 import { doc, getDoc } from "firebase/firestore";
 import { useDispatch } from "react-redux";
 import { saveInterpretation } from "../snippets/SnippetSlice";
@@ -14,7 +16,6 @@ import ModalContainer from "./ModalContainer";
 import DreamModalMobile from "./DreamModalMobile";
 
 import { useMediaQuery } from "../../hooks/useMediaQuery";
-import { generateDreamInterpretationMock } from "../../utils/generateDreamInterpretationMock";
 import InterpretationControls from "./InterpretationControls";
 
 const DreamModal = () => {
@@ -95,7 +96,6 @@ const DreamModal = () => {
     }
   };
 
-  // setIsModalOpen={setIsModalOpen}
   if (isMobile) {
     return (
       <DreamModalMobile

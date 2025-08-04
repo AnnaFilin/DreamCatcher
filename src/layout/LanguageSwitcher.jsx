@@ -5,9 +5,6 @@ const languageLabels = {
   en: "en",
   ru: "ru",
   he: "he",
-  //   en: "EN",
-  //   ru: "RU",
-  //   he: "HE",
 };
 
 const LanguageSwitcher = () => {

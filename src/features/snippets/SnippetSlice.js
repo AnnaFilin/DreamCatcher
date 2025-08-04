@@ -60,7 +60,7 @@ export const saveInterpretation = createAsyncThunk(
     const newInterpretation = {
       id: Date.now().toString(),
       text: interpretationText,
-      createdAt: new Date().toISOString(), // string вместо serverTimestamp
+      createdAt: new Date().toISOString(),
     };
 
     await updateDoc(snippetRef, {

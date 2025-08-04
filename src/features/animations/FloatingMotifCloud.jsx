@@ -63,7 +63,7 @@ export default function FloatingPublicMotifs({ setSelectedMotif }) {
   };
 
   return (
-    <>
+    <div className="absolute inset-0 z-10 pointer-events-none">
       {floatingItems.map((item) => (
         <FloatingMotifText
           key={item.id}
@@ -75,7 +75,7 @@ export default function FloatingPublicMotifs({ setSelectedMotif }) {
           }}
         />
       ))}
-    </>
+    </div>
   );
 }
 
@@ -152,7 +152,7 @@ function FloatingMotifText({ item, onRemove, onSelect }) {
 
   return (
     <div
-      className="leading-snug tracking-tight italic font-thin font-marck"
+      className="leading-snug tracking-tight italic font-thin font-manrope"
       style={{
         ...style,
         position: "fixed",
@@ -168,7 +168,11 @@ function FloatingMotifText({ item, onRemove, onSelect }) {
         filter: "blur(0.3px)",
         zIndex: 10,
       }}
-      onMouseEnter={onSelect}
+      onMouseEnter={
+        typeof window !== "undefined" && window.innerWidth >= 768
+          ? onSelect
+          : undefined
+      }
       onTouchStart={onSelect}
     >
       {item.text}

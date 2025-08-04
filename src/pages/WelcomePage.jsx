@@ -9,7 +9,6 @@ import { useTranslation } from "react-i18next";
 
 const WelcomePage = () => {
   const { t } = useTranslation();
-
   const user = useSelector((state) => state.user);
   const [selectedMotif, setSelectedMotif] = useState(null);
 
@@ -18,29 +17,41 @@ const WelcomePage = () => {
   }
 
   return (
-    <div className="flex flex-1 flex-col items-center justify-center text-white px-6 text-center">
-      <FloatingPublicMotifs setSelectedMotif={setSelectedMotif} />
+    <div className="relative flex flex-1 items-center justify-center text-white px-6 text-center">
+      <div className="absolute inset-0 z-0">
+        <FloatingPublicMotifs setSelectedMotif={setSelectedMotif} />
+      </div>
 
       {selectedMotif ? (
-        <MotifTextDisplay motif={selectedMotif} />
+        <div className="z-20">
+          <MotifTextDisplay motif={selectedMotif} />
+        </div>
       ) : (
-        <>
-          <h1 className="text-4xl font-sora font-light mb-4">
+        <div className="absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 px-6 text-center">
+          <h1 className="text-4xl text-white/80 font-sora font-light mb-4">
             {t("welcome.title")}
           </h1>
-          <p className="text-white/60 max-w-md">{t("welcome.description")}</p>
-          <div className="mt-6 flex items-baseline gap-6">
+          <p className="text-white/60 max-w-md mx-auto">
+            {t("welcome.description")}
+          </p>
+
+          <div className="mt-6 w-full max-w-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-sm text-white/70">
             <NavLink
               to="/register"
-              className=" uppercase text-xs tracking-widest transition 
-          text-white/70 hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]"
+              className="uppercase text-xs tracking-widest hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]"
             >
               {t("welcome.signup")}
             </NavLink>
-            <p className="text-sm text-white/60 ">{t("welcome.already")}</p>
-            <LoginButton />
+
+            <p className="text-center sm:text-left text-white/60">
+              {t("welcome.already")}
+            </p>
+
+            <div className="flex justify-center sm:justify-end">
+              <LoginButton />
+            </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );

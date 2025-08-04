@@ -1,4 +1,9 @@
 {
+  "welcome.title": "Dream Catcher",
+  "welcome.description": "An ambient space for logging your dreams, exploring unconscious patterns, and receiving AI interpretations.",
+  "welcome.signup": "Sign up",
+  "welcome.signin": "Sign in",
+  "welcome.already": "Already have an account?",
   "archive.title": "Dream Archive",
   "home.title": "Sleep Log",
   "dream_journal.title": "Dream Journal",

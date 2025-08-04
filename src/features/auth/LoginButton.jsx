@@ -25,7 +25,6 @@ const LoginButton = () => {
       "
     >
       {t("buttons.sign_in")}
-      {/* Sign In */}
     </button>
   );
 };
