@@ -49,5 +49,12 @@
   "about": {
     "title": "Dreamcatcher",
     "description": "Dreaming is a form of reality with a different logic. Perception remains active: feelings, memory, intention. Space and time reorganize, images take on autonomy. Sometimes states arise in which the familiar “I” recedes — a person becomes a tree, a faceless figure, a motion. Even when these experiences aren’t remembered, they continue to act — in the body, in perception, in the version of self that wakes up.\n\nDreamcatcher is a tool for capturing dreams and noticing recurring motifs and inner states. Keeping a dream journal regularly increases awareness of the inner world and makes lucid dreaming more likely. Where recognition appears, so does the chance to remember that you’re dreaming — and to take hold of the fabric of the dream itself. In this state, anything becomes possible: reshaping space, exploring, building your own reality. The experience affects not only the night, but deepens attention during the day.\n\nThe AI in Dreamcatcher traces connections, repetitions, emotional patterns, and accumulations of meaning. It also offers interpretations inspired by Jung’s archetypal approach — as a way to listen to how the unconscious speaks through symbols. Dreams draw nearer. Life becomes more distinct."
+  },
+  "lucid_stats": {
+    "label": "{{lucid}} lucid of {{total}} total dreams",
+    "empty": "No dreams yet"
+  },
+  "placeholders": {
+    "no_recent_dreams": "No dreams yet — your dream journal starts here!"
   }
 }

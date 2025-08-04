@@ -6,6 +6,18 @@ const MSpan = motion.span;
 const KeyMotifs = () => {
   const motifs = useSelector((state) => state.motifs.motifs);
 
+  if (!motifs || motifs.length === 0) {
+    return (
+      <div className="w-full h-full flex items-center justify-center p-6">
+        <div className="text-center text-white/40 font-sora text-lg md:text-xl animate-pulse">
+          No key motifs yet.
+          <br />
+          Add more dreams to reveal hidden patterns.
+        </div>
+      </div>
+    );
+  }
+
   const limitedMotifs = motifs.slice(0, 10).map((label) => ({
     label,
     frequency: Math.random(),

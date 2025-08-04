@@ -16,6 +16,7 @@ import LoginButton from "../features/auth/LoginButton";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 import { DreamContext } from "../contexts/DreamContext";
+import AvatarFallback from "./AvatarFallback";
 
 const Header = () => {
   const [user] = useAuthState(auth);
@@ -157,11 +158,20 @@ const Header = () => {
                 {t("buttons.sign_out")}
               </button>
 
-              <img
+              {/* <img
                 src={user.photoURL}
                 alt="avatar"
                 className="w-10 h-10 rounded-md border border-white/20 shadow-md"
-              />
+              /> */}
+              {user?.photoURL ? (
+                <img
+                  src={user.photoURL}
+                  alt={user.displayName}
+                  className="w-10 h-10 rounded-full object-cover shrink-0"
+                />
+              ) : (
+                <AvatarFallback name={user.displayName || "User"} size={40} />
+              )}
             </div>
           )}
         </div>

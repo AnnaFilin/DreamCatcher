@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import SnippetCard from "./SnippetCard";
+import EmptyStateRecentDreams from "../../layout/EmptyStateRecentDreams";
 
 const SnippetList = ({ limit }) => {
   const snippets = useSelector((state) => state.snippets.snippets);
@@ -8,6 +9,10 @@ const SnippetList = ({ limit }) => {
   );
 
   const shownSnippets = limit ? sortedSnippets.slice(0, limit) : sortedSnippets;
+
+  if (!snippets || snippets.length === 0) {
+    return <EmptyStateRecentDreams />;
+  }
 
   return (
     <div className="h-auto lg:h-[calc(100vh-360px)] flex flex-col">
