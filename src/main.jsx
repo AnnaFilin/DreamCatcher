@@ -1,11 +1,11 @@
 import React from "react";
 
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store/store.js";
 import { DreamProvider } from "./contexts/DreamProvider";
-import { useSelector } from "react-redux";
+
 import Layout from "./layout/Layout.jsx";
 import PublicLayout from "./layout/PublicLayout.jsx";
 import Home from "./pages/Home.jsx";
@@ -18,15 +18,6 @@ import DirectionManager from "./layout/DirectionManager";
 import "./index.css";
 import "./i18n/i18n";
 
-export const RootRedirect = () => {
-  const user = useSelector((state) => state.user);
-  return user?.isLoggedIn ? (
-    <Navigate to="/" replace />
-  ) : (
-    <Navigate to="/welcome" replace />
-  );
-};
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
@@ -34,8 +25,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <DirectionManager />
         <BrowserRouter>
           <Routes>
-            {/* <Route path="/" element={<RootRedirect />} /> */}
-
             <Route element={<PublicLayout />}>
               <Route path="/about" element={<About />} />
 

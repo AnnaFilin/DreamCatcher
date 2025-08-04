@@ -1,17 +1,33 @@
-import { useState } from "react";
-import GenerateButton from "./GenerateButton";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+import GenerateButton from "./GenerateButton";
 import InterpretationBlock from "./InterpretationBlock";
 
 const InterpretationControls = ({
   interpretations = [],
   handleGenerate,
   isGenerating,
+  forceShow = false,
+  onHide,
 }) => {
   const [showAll, setShowAll] = useState(false);
   const { t } = useTranslation();
+  const isMobile = useMediaQuery("(max-width: 639px)");
 
-  const toggleShow = () => setShowAll((prev) => !prev);
+  useEffect(() => {
+    if (forceShow) {
+      setShowAll(true);
+    }
+  }, [forceShow]);
+
+  const toggleShow = () => {
+    setShowAll((prev) => {
+      const next = !prev;
+      if (!next && onHide) onHide();
+      return next;
+    });
+  };
 
   return (
     <div className="mt-6 space-y-4">
@@ -20,10 +36,10 @@ const InterpretationControls = ({
           <button
             onClick={toggleShow}
             className="
-  w-full px-4 py-3 border border-white/20 text-sm text-white/80 rounded-md text-center transition
-  hover:bg-white/10 hover:text-white active:bg-white/10
-  sm:w-auto sm:px-6 sm:py-2 sm:text-xs sm:uppercase sm:tracking-wider sm:text-white/60 sm:border-none
-"
+              w-full px-4 py-3 border border-white/20 text-sm text-white/80 rounded-md text-center transition
+              hover:bg-white/10 hover:text-white active:bg-white/10
+              sm:w-auto sm:px-6 sm:py-2 sm:text-xs sm:uppercase sm:tracking-wider sm:text-white/60 sm:border-none
+            "
           >
             {showAll
               ? t("buttons.hideInterpretations")
@@ -38,16 +54,14 @@ const InterpretationControls = ({
 
       {showAll && (
         <div
-          className="
-      max-h-[28vh]
-      overflow-y-auto
-      overflow-x-hidden
-      border border-white/10
-      rounded-2xl
-      px-4 py-4 pr-5
-      custom-scrollbar
-    "
-          style={{ scrollbarGutter: "stable both-edges" }}
+          className={`
+            ${isMobile ? "" : "max-h-[28vh] overflow-y-auto overflow-x-hidden"}
+            border border-white/10
+            rounded-2xl
+            px-4 py-4 pr-5
+            custom-scrollbar
+          `}
+          style={{ scrollbarGutter: isMobile ? "auto" : "stable both-edges" }}
         >
           <div className="py-4 space-y-6 text-left">
             {interpretations.map((interp, idx) => (

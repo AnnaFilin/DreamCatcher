@@ -1,14 +1,25 @@
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import SnippetCard from "../features/snippets/SnippetCard";
 import MotifFilterBlock from "../features/archive/MotifFilterBlock";
 import PageHeader from "../layout/PageHeader";
 import PageWrapper from "../layout/PageWrapper";
+import { fetchSnippets } from "../features/snippets/SnippetSlice";
+import { fetchMotifs } from "../features/motifs/MotifsSlice";
 
 const ArchivePage = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+
   const allSnippets = useSelector((state) => state.snippets.snippets);
+
+  useEffect(() => {
+    if (allSnippets.length === 0) {
+      dispatch(fetchSnippets());
+      dispatch(fetchMotifs());
+    }
+  }, [allSnippets.length, dispatch]);
 
   const [lucidOnly, setLucidOnly] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");

@@ -1,8 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { DreamContext } from "../../contexts/DreamContext";
 import { db } from "../../firebase/firebase";
-// TEMP: using mock instead of real OpenAI call for testing
-// import { generateDreamInterpretation } from "../../utils/generateDreamInterpretation";
 import { generateDreamInterpretationMock } from "../../utils/generateDreamInterpretationMock";
 import { doc, getDoc } from "firebase/firestore";
 import { useDispatch } from "react-redux";
@@ -19,19 +17,23 @@ import { useMediaQuery } from "../../hooks/useMediaQuery";
 import InterpretationControls from "./InterpretationControls";
 
 const DreamModal = () => {
-  const { isModalOpen, setIsModalOpen, currentDream } =
-    useContext(DreamContext);
+  const {
+    isModalOpen,
+    setIsModalOpen,
+    currentDream,
+    justGenerated,
+    setJustGenerated,
+  } = useContext(DreamContext);
+
   const [symbols, setSymbols] = useState([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [allInterpretations, setAllInterpretations] = useState([]);
 
   const dispatch = useDispatch();
-
   const isMobile = useMediaQuery("(max-width: 639px)");
 
   useEffect(() => {
     if (!currentDream || !currentDream.motifs) return;
-
     setAllInterpretations(currentDream.interpretations || []);
 
     const fetchSymbols = async () => {
@@ -77,16 +79,13 @@ const DreamModal = () => {
         })
       );
 
-      const updatedInterpretations = [
+      const updated = [
         ...allInterpretations,
-        {
-          text: result,
-          createdAt: new Date().toISOString(),
-        },
+        { text: result, createdAt: new Date().toISOString() },
       ];
 
-      setAllInterpretations(updatedInterpretations);
-
+      setAllInterpretations(updated);
+      setJustGenerated(true);
       toast("Interpretation saved successfully.", { icon: false });
     } catch (err) {
       console.error("❌ Interpretation error:", err);
@@ -96,37 +95,45 @@ const DreamModal = () => {
     }
   };
 
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setJustGenerated(false);
+  };
+
   if (isMobile) {
     return (
       <DreamModalMobile
         currentDream={currentDream}
         handleGenerate={handleGenerate}
         isGenerating={isGenerating}
-        interpretations={currentDream.interpretations}
+        interpretations={allInterpretations}
         dreamDate={dreamDate}
+        showInterpretations={justGenerated}
+        onResetShow={() => setJustGenerated(false)}
+        onCloseModal={closeModal}
       />
     );
   }
 
   return (
-    <ModalContainer onClose={() => setIsModalOpen(false)}>
+    <ModalContainer onClose={closeModal}>
       <button
-        onClick={() => setIsModalOpen(false)}
+        onClick={closeModal}
         className="absolute top-6 right-6 text-white/40 hover:text-white/80 transition"
       >
         ✕
       </button>
 
       <DreamDate date={dreamDate} />
-
       <DreamTextBlock text={currentDream.text} />
-
       <MotifsList motifs={currentDream.motifs} />
 
       <InterpretationControls
         interpretations={allInterpretations}
         handleGenerate={handleGenerate}
         isGenerating={isGenerating}
+        forceShow={justGenerated}
+        onHide={() => setJustGenerated(false)}
       />
     </ModalContainer>
   );

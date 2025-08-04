@@ -196,6 +196,77 @@ const Header = () => {
               className="hover:text-white transition"
               onClick={(e) => {
                 setMenuOpen(false);
+                if (location.pathname === "/" && isModalOpen && isMobile) {
+                  e.preventDefault();
+                  setIsModalOpen(false);
+                }
+              }}
+            >
+              {t("nav.home")}
+            </NavLink>
+          )}
+          {user && (
+            <NavLink
+              to="/archive"
+              className="hover:text-white transition"
+              onClick={(e) => {
+                setMenuOpen(false);
+                if (isModalOpen && isMobile) {
+                  e.preventDefault();
+                  setIsModalOpen(false);
+                  navigate("/archive");
+                }
+              }}
+            >
+              {t("nav.archive")}
+            </NavLink>
+          )}
+          <NavLink
+            to="/about"
+            className="hover:text-white transition"
+            onClick={(e) => {
+              setMenuOpen(false);
+              if (isModalOpen && isMobile) {
+                e.preventDefault();
+                setIsModalOpen(false);
+                navigate("/about");
+              }
+            }}
+          >
+            {t("nav.about")}
+          </NavLink>
+
+          {user && (
+            <button
+              onClick={() => {
+                handleSignOut();
+                setMenuOpen(false);
+              }}
+              className="text-white/60 hover:text-white transition text-sm tracking-wider uppercase"
+            >
+              {t("buttons.sign_out")}
+            </button>
+          )}
+          <button
+            onClick={() => {
+              toggleLanguage();
+              setMenuOpen(false);
+            }}
+            className="text-white/60 hover:text-white transition text-sm tracking-wider uppercase"
+          >
+            {i18n.language === "en" ? "RU" : "EN"}
+          </button>
+        </div>
+      )}
+
+      {/* {menuOpen && (
+        <div className="lg:hidden mt-4 px-4 flex flex-col items-center gap-4 text-white/60 uppercase tracking-wider text-sm">
+          {user && (
+            <NavLink
+              to="/"
+              className="hover:text-white transition"
+              onClick={(e) => {
+                setMenuOpen(false);
 
                 if (location.pathname === "/" && isModalOpen && isMobile) {
                   e.preventDefault();
@@ -244,7 +315,7 @@ const Header = () => {
             {i18n.language === "en" ? "RU" : "EN"}
           </button>
         </div>
-      )}
+      )} */}
     </header>
   );
 };

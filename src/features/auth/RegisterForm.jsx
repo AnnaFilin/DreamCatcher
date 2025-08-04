@@ -135,10 +135,6 @@ const RegisterForm = () => {
 
         {error && <p className="text-rose-400 text-sm mt-4">{error}</p>}
 
-        {/* <p className={`${themeFonts.smallInfo} mt-6 text-center`}>
-          {t("form.already_have_account")}
-          <LoginButton />
-        </p> */}
         <p
           className={`${themeFonts.smallInfo} mt-6 text-center flex flex-wrap justify-center items-center gap-1 sm:gap-2`}
         >
