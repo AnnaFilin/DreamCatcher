@@ -1,10 +1,21 @@
-export async function generateDreamInterpretation({ text, symbols }) {
+import i18n from "../i18n/i18n";
+
+export async function generateDreamInterpretation({ text, symbols, lang }) {
+  const usedLang = lang || i18n.language || "en";
+
   const motifsPart = symbols
     .map(
       (s) =>
         `- ${s.id}: ${s.arch || "Unknown"} — ${s.meaning || "No meaning yet."}`
     )
     .join("\n");
+
+  const langTag =
+    usedLang === "ru"
+      ? "in RUSSIAN"
+      : usedLang === "he"
+      ? "in HEBREW"
+      : "in ENGLISH";
 
   const prompt = `
 Dream text:
@@ -15,7 +26,7 @@ ${text}
 Key motifs and their archetypal meanings:
 ${motifsPart}
 
-Write a short Jungian-style interpretation of this dream in RUSSIAN, considering the motifs and their symbolic meanings. Be concise, poetic and insightful.
+Write a short Jungian-style interpretation of this dream ${langTag}, considering the motifs and their symbolic meanings. Be concise, poetic and insightful.
 `;
 
   console.log("📌 FINAL PROMPT:", prompt);

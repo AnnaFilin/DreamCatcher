@@ -1,18 +1,23 @@
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 const MSpan = motion.span;
 
 const KeyMotifs = () => {
+  const { t } = useTranslation();
   const motifs = useSelector((state) => state.motifs.motifs);
 
   if (!motifs || motifs.length === 0) {
     return (
       <div className="w-full h-full flex items-center justify-center p-6">
-        <div className="text-center text-white/40 font-sora text-lg md:text-xl animate-pulse">
-          No key motifs yet.
+        <div className="text-center text-white/30 font-sora text-lg md:text-xl animate-[pulse_6s_ease-in-out_infinite]">
+          {/* No key motifs yet. */}
+          {t("placeholders.no_key_motifs")}
           <br />
-          Add more dreams to reveal hidden patterns.
+          <span className="text-white/20">
+            {t("placeholders.add_more_dreams")}
+          </span>
         </div>
       </div>
     );

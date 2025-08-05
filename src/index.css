@@ -95,6 +95,16 @@ main {
   mask-image: linear-gradient(to bottom, black 45%, transparent 100%);
 }
 
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
 @keyframes dreamPresence {
   0% {
     transform: translate(0, 0) scale(0.95) rotate(0deg);

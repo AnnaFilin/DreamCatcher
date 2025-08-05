@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 const getInitials = (name) => {
   return name
     .split(" ")
@@ -7,10 +9,11 @@ const getInitials = (name) => {
 };
 
 const AvatarFallback = ({ name }) => {
-  const initials = getInitials(name || "Anonymous");
+  const { t } = useTranslation();
+  const initials = getInitials(name || t("user.anonymous"));
 
   return (
-    <div className="w-8 h-8 rounded-full bg-white/10 text-white flex items-center justify-center text-sm font-medium border border-white/20 shadow-sm">
+    <div className="w-10 h-10 rounded-md bg-white/5 text-white/60 flex items-center justify-center text-2xl font-semibold border border-white/20 shadow-md">
       {initials}
     </div>
   );

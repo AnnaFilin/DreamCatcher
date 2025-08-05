@@ -1,7 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { DreamContext } from "../../contexts/DreamContext";
 import { db } from "../../firebase/firebase";
-import { generateDreamInterpretationMock } from "../../utils/generateDreamInterpretationMock";
+import i18n from "../../i18n/i18n";
+// import { generateDreamInterpretationMock } from "../../utils/generateDreamInterpretationMock";
+import { generateDreamInterpretation } from "../../utils/generateDreamInterpretation";
+
 import { doc, getDoc } from "firebase/firestore";
 import { useDispatch } from "react-redux";
 import { saveInterpretation } from "../snippets/SnippetSlice";
@@ -67,10 +70,15 @@ const DreamModal = () => {
   const handleGenerate = async () => {
     setIsGenerating(true);
     try {
-      const result = await generateDreamInterpretationMock({
+      const result = await generateDreamInterpretation({
         text: currentDream.text,
         symbols,
+        lang: i18n.language,
       });
+      // const result = await generateDreamInterpretationMock({
+      //   text: currentDream.text,
+      //   symbols,
+      // });
 
       await dispatch(
         saveInterpretation({

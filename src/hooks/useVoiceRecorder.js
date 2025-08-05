@@ -1,12 +1,17 @@
 import { useRef, useState } from "react";
 
-export const useVoiceRecorder = ({ onResult, useMock = false }) => {
+export const useVoiceRecorder = ({
+  onResult,
+  useMock = false,
+  language = "en",
+}) => {
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
   const [isRecording, setIsRecording] = useState(false);
 
   const startRecording = async () => {
     try {
+      console.log("🎙️ Starting recording...");
       if (useMock) {
         console.log("🧪 Using MOCK Whisper");
         await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -42,7 +47,7 @@ export const useVoiceRecorder = ({ onResult, useMock = false }) => {
         const formData = new FormData();
         formData.append("file", audioBlob, "recording.webm");
         formData.append("model", "whisper-1");
-        formData.append("language", "ru");
+        formData.append("language", language);
 
         try {
           const response = await fetch(
@@ -59,7 +64,8 @@ export const useVoiceRecorder = ({ onResult, useMock = false }) => {
           const data = await response.json();
           console.log("🔤 Whisper result:", data);
 
-          if (data.text) {
+          if (typeof data.text === "string" && data.text.trim()) {
+            console.log("📥 Recognized text:", data.text);
             onResult(data.text);
           } else {
             alert("❌ Whisper return empty");

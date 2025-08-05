@@ -55,6 +55,11 @@
     "empty": "No dreams yet"
   },
   "placeholders": {
-    "no_recent_dreams": "No dreams yet — your dream journal starts here!"
+    "no_recent_dreams": "No dreams yet — your dream journal starts here!",
+    "no_key_motifs": "No key motifs yet.",
+    "add_more_dreams": "Add more dreams to reveal hidden patterns."
+  },
+  "user": {
+    "anonymous": "Anonymous"
   }
 }

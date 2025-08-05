@@ -19,6 +19,7 @@ import { useVoiceRecorder } from "../../hooks/useVoiceRecorder";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import i18n from "../../i18n/i18n";
 
 const SnippetInput = () => {
   const { t } = useTranslation();
@@ -28,8 +29,18 @@ const SnippetInput = () => {
   const [isSaving, setIsSaving] = useState(false);
 
   const { startRecording, stopRecording, isRecording } = useVoiceRecorder({
-    onResult: (result) => setText((prev) => `${prev} ${result}`),
-    useMock: true,
+    // onResult: (result) => setText((prev) => `${prev} ${result}`),
+    onResult: (result) => {
+      if (typeof result === "string" && result.trim()) {
+        setText((prev) => `${prev} ${result.trim()}`);
+      } else {
+        toast.warn("⚠️ Нераспознанный текст или ошибка.");
+        console.warn("🤔 Whisper вернул странный результат:", result);
+      }
+    },
+
+    useMock: false,
+    language: i18n.language,
   });
   const isLargeScreen = useMediaQuery("(min-width: 640px)");
 
@@ -74,7 +85,7 @@ const SnippetInput = () => {
   return (
     <div className="flex flex-col flex-grow">
       <textarea
-        value={text}
+        value={typeof text === "string" ? text : ""}
         onChange={(e) => setText(e.target.value)}
         placeholder={t("dream_input.placeholder")}
         className={`
@@ -133,7 +144,7 @@ const SnippetInput = () => {
             ) : !isRecording ? (
               <ButtonStart onClick={startRecording} />
             ) : (
-              <ButtonStop onClick={stopRecording} />
+              <ButtonStop onClick={stopRecording} isRecording={isRecording} />
             )}
             <ButtonSave onClick={handleAdd} />
           </div>
