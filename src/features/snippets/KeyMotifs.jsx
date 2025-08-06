@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { formatMotif } from "../../utils/formatMotif";
 
 const MSpan = motion.span;
 
@@ -12,7 +13,6 @@ const KeyMotifs = () => {
     return (
       <div className="w-full h-full flex items-center justify-center p-6">
         <div className="text-center text-white/30 font-sora text-lg md:text-xl animate-[pulse_6s_ease-in-out_infinite]">
-          {/* No key motifs yet. */}
           {t("placeholders.no_key_motifs")}
           <br />
           <span className="text-white/20">
@@ -23,9 +23,10 @@ const KeyMotifs = () => {
     );
   }
 
-  const limitedMotifs = motifs.slice(0, 10).map((label) => ({
-    label,
-    frequency: Math.random(),
+  const maxCount = Math.max(...motifs.map((m) => m.count || 1));
+  const limitedMotifs = motifs.slice(0, 10).map((m) => ({
+    ...m,
+    frequency: (m.count || 1) / maxCount,
   }));
 
   const gridCols = 5;
@@ -59,10 +60,11 @@ const KeyMotifs = () => {
         {motifsWithPos.map((m, i) => {
           const baseScale = 0.8 + m.frequency * 0.4;
           const baseOpacity = 0.3 + m.frequency * 0.4;
+          const label = formatMotif(m);
 
           return (
             <MSpan
-              key={i}
+              key={label + i}
               initial={{ opacity: baseOpacity, scale: baseScale }}
               animate={{
                 opacity: [baseOpacity, baseOpacity * 1.1, baseOpacity],
@@ -81,7 +83,7 @@ const KeyMotifs = () => {
                 fontSize: `${1 + m.frequency * 0.8}rem`,
               }}
             >
-              {m.label}
+              {label}
             </MSpan>
           );
         })}

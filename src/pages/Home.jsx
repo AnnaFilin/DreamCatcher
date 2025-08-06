@@ -4,8 +4,8 @@ import KeyMotifs from "../features/snippets/KeyMotifs";
 import LucidStats from "../features/snippets/LucidStats";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { fetchMotifs } from "../features/motifs/MotifsSlice";
-import { fetchSnippets } from "../features/snippets/SnippetSlice";
+import { fetchMotifs } from "../store/MotifsSlice";
+import { fetchSnippets } from "../store/SnippetSlice";
 import { themeSpacing, themeColors, themeRadii } from "../utils/themeTokens";
 import { useTranslation } from "react-i18next";
 

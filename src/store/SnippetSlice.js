@@ -3,7 +3,6 @@ import {
   collection,
   addDoc,
   setDoc,
-  getDoc,
   getDocs,
   updateDoc,
   arrayUnion,
@@ -13,9 +12,9 @@ import {
   orderBy,
   serverTimestamp,
 } from "firebase/firestore";
-import { auth, db } from "../../firebase/firebase";
-import { getMotifs } from "../../utils/getMotifs";
-import { saveSymbolIfNew } from "../../utils/saveSymbolIfNew";
+import { auth, db } from "../firebase/firebase";
+import { getMotifs } from "../utils/getMotifs";
+import { saveSymbolIfNew } from "../utils/saveSymbolIfNew";
 
 export const fetchSnippets = createAsyncThunk(
   "snippets/fetchSnippets",
@@ -77,55 +76,89 @@ export const addSnippet = createAsyncThunk(
     const uid = auth.currentUser?.uid;
     if (!uid) throw new Error("Not authenticated");
 
-    if (!knownMotifs) knownMotifs = [];
-
-    const motifsDocRef = doc(db, "users", uid, "meta", "motifs");
-
     try {
-      const motifsDocSnap = await getDoc(motifsDocRef);
-      if (!motifsDocSnap.exists()) {
-        console.log("📂 Creating empty motifs doc...");
-        await setDoc(motifsDocRef, { motifs: [] });
+      const motifsDocRef = doc(db, "users", uid, "meta", "motifs");
+
+      const symbolsSnapshot = await getDocs(collection(db, "symbols"));
+
+      const globalMotifIds = symbolsSnapshot.docs
+        .map((doc) => doc.id)
+        .filter((id) => typeof id === "string")
+        .map((id) => id.toLowerCase());
+
+      const rawMotifs = knownMotifs || [];
+
+      const existingMotifs = rawMotifs.map((m) =>
+        typeof m === "string" ? { value: m, count: 1 } : m
+      );
+
+      const userMotifValues = existingMotifs.map((m) => m.value.toLowerCase());
+
+      const knownValues = [...new Set([...userMotifValues, ...globalMotifIds])];
+
+      const motifsFromGPT = await getMotifs(text, knownValues);
+
+      // console.log("🧠 GPT motifs:", motifsFromGPT);
+      // console.log("📌 Known motifs (user):", userMotifValues);
+      // console.log("🌐 Global motifs:", globalMotifIds);
+
+      const motifsForSnippet = [];
+      const updatedMotifs = [...existingMotifs];
+
+      for (const motif of motifsFromGPT) {
+        const lower = motif.toLowerCase();
+        const existing = updatedMotifs.find(
+          (m) => m.value.toLowerCase() === lower
+        );
+
+        if (existing) {
+          const updated = {
+            ...existing,
+            count: (existing.count || 1) + 1,
+          };
+
+          const index = updatedMotifs.findIndex(
+            (m) => m.value.toLowerCase() === lower
+          );
+          updatedMotifs[index] = updated;
+
+          motifsForSnippet.push(updated.value);
+        } else {
+          const value = typeof motif === "string" ? motif : motif.value;
+          updatedMotifs.push({ value, count: 1 });
+          motifsForSnippet.push(value);
+          await saveSymbolIfNew(value);
+        }
       }
 
-      const motifs = await getMotifs(text, knownMotifs);
-      console.log("✅ FINAL MOTIFS:", motifs);
+      // console.log("🔁 Final motifs for snippet:", motifsForSnippet);
+      // console.log("🧾 Updated meta.motifs:", updatedMotifs);
 
-      const newMotifs = motifs.filter((m) => !knownMotifs.includes(m));
-
-      if (newMotifs.length > 0) {
-        await setDoc(motifsDocRef, {
-          motifs: [...knownMotifs, ...newMotifs],
-        });
-        console.log("✅ META/MOTIFS UPDATED");
-      } else {
-        console.log("⚠️ No new motifs to add");
-      }
-
-      for (const motif of motifs) {
-        await saveSymbolIfNew(motif);
-      }
+      await setDoc(motifsDocRef, { motifs: updatedMotifs });
 
       const docRef = await addDoc(collection(db, "users", uid, "snippets"), {
         text,
         isLucid,
         vividness,
-        motifs,
+        motifs: motifsForSnippet.map((m) =>
+          typeof m === "string" ? m : m.value
+        ),
+
         createdAt: serverTimestamp(),
       });
 
-      console.log("✅ SNIPPET SAVED WITH ID:", docRef.id);
+      // console.log("✅ Snippet saved with ID:", docRef.id);
 
       return {
         id: docRef.id,
         text,
         isLucid,
         vividness,
-        motifs,
+        motifs: motifsForSnippet,
         createdAt: Date.now(),
       };
     } catch (err) {
-      console.error("❌ Firestore or GPT error:", err);
+      console.error("❌ Error saving snippet:", err);
       throw err;
     }
   }

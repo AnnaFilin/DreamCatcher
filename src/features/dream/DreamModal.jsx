@@ -7,7 +7,7 @@ import { generateDreamInterpretation } from "../../utils/generateDreamInterpreta
 
 import { doc, getDoc } from "firebase/firestore";
 import { useDispatch } from "react-redux";
-import { saveInterpretation } from "../snippets/SnippetSlice";
+import { saveInterpretation } from "../../store/SnippetSlice";
 import { toast } from "react-toastify";
 
 import MotifsList from "./MotifsList";
@@ -18,6 +18,7 @@ import DreamModalMobile from "./DreamModalMobile";
 
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 import InterpretationControls from "./InterpretationControls";
+import { useTranslation } from "react-i18next";
 
 const DreamModal = () => {
   const {
@@ -32,6 +33,7 @@ const DreamModal = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [allInterpretations, setAllInterpretations] = useState([]);
 
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const isMobile = useMediaQuery("(max-width: 639px)");
 
@@ -75,10 +77,6 @@ const DreamModal = () => {
         symbols,
         lang: i18n.language,
       });
-      // const result = await generateDreamInterpretationMock({
-      //   text: currentDream.text,
-      //   symbols,
-      // });
 
       await dispatch(
         saveInterpretation({
@@ -94,10 +92,10 @@ const DreamModal = () => {
 
       setAllInterpretations(updated);
       setJustGenerated(true);
-      toast("Interpretation saved successfully.", { icon: false });
+      toast.success(t("toasts.interpretationSaved"), { icon: false });
     } catch (err) {
       console.error("❌ Interpretation error:", err);
-      toast.error("Failed to generate interpretation.", { icon: false });
+      toast.error(t("toasts.interpretationError"), { icon: false });
     } finally {
       setIsGenerating(false);
     }

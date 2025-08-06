@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addSnippet } from "../snippets/SnippetSlice";
-import { fetchMotifs } from "../motifs/MotifsSlice";
+import { addSnippet } from "../../store/SnippetSlice";
+import { fetchMotifs } from "../../store/MotifsSlice";
 import {
   themeFonts,
   themeSpacing,
@@ -29,13 +29,11 @@ const SnippetInput = () => {
   const [isSaving, setIsSaving] = useState(false);
 
   const { startRecording, stopRecording, isRecording } = useVoiceRecorder({
-    // onResult: (result) => setText((prev) => `${prev} ${result}`),
     onResult: (result) => {
       if (typeof result === "string" && result.trim()) {
         setText((prev) => `${prev} ${result.trim()}`);
       } else {
-        toast.warn("⚠️ Нераспознанный текст или ошибка.");
-        console.warn("🤔 Whisper вернул странный результат:", result);
+        toast.warn(t("toasts.transcriptionError"));
       }
     },
 
@@ -49,7 +47,7 @@ const SnippetInput = () => {
 
   const handleAdd = async () => {
     if (!text.trim()) {
-      toast.warn("Dream text is empty.");
+      toast.warn(t("toasts.dreamEmpty"));
       return;
     }
 
@@ -69,11 +67,11 @@ const SnippetInput = () => {
       setIsLucid(false);
       setVividness("");
 
-      toast.success("Dream saved successfully.", {
+      toast.success(t("toasts.dreamSaved"), {
         icon: false,
       });
     } catch (error) {
-      toast.error("Failed to save the dream.", {
+      toast.error(t("toasts.dreamSaveError"), {
         icon: false,
       });
       console.error("Save error:", error);

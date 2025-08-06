@@ -158,11 +158,6 @@ const Header = () => {
                 {t("buttons.sign_out")}
               </button>
 
-              {/* <img
-                src={user.photoURL}
-                alt="avatar"
-                className="w-10 h-10 rounded-md border border-white/20 shadow-md"
-              /> */}
               {user?.photoURL ? (
                 <img
                   src={user.photoURL}
@@ -268,64 +263,6 @@ const Header = () => {
           </button>
         </div>
       )}
-
-      {/* {menuOpen && (
-        <div className="lg:hidden mt-4 px-4 flex flex-col items-center gap-4 text-white/60 uppercase tracking-wider text-sm">
-          {user && (
-            <NavLink
-              to="/"
-              className="hover:text-white transition"
-              onClick={(e) => {
-                setMenuOpen(false);
-
-                if (location.pathname === "/" && isModalOpen && isMobile) {
-                  e.preventDefault();
-                  setIsModalOpen(false);
-                }
-              }}
-            >
-              {t("nav.home")}
-            </NavLink>
-          )}
-          {user && (
-            <NavLink
-              to="/archive"
-              onClick={() => setMenuOpen(false)}
-              className="hover:text-white transition"
-            >
-              {t("nav.archive")}
-            </NavLink>
-          )}
-          <NavLink
-            to="/about"
-            onClick={() => setMenuOpen(false)}
-            className="hover:text-white transition"
-          >
-            {t("nav.about")}
-          </NavLink>
-
-          {user && (
-            <button
-              onClick={() => {
-                handleSignOut();
-                setMenuOpen(false);
-              }}
-              className="text-white/60 hover:text-white transition text-sm tracking-wider uppercase"
-            >
-              {t("buttons.sign_out")}
-            </button>
-          )}
-          <button
-            onClick={() => {
-              toggleLanguage();
-              setMenuOpen(false);
-            }}
-            className="text-white/60 hover:text-white transition text-sm tracking-wider uppercase"
-          >
-            {i18n.language === "en" ? "RU" : "EN"}
-          </button>
-        </div>
-      )} */}
     </header>
   );
 };

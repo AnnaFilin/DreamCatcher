@@ -10,6 +10,9 @@ import { fetchSymbolMeta } from "./fetchSymbolMeta";
 import { ALLOWED_ARCHETYPES } from "../config/archetypes";
 
 export async function saveSymbolIfNew(motif) {
+  motif = typeof motif === "string" ? motif : motif?.value;
+  if (!motif) return;
+
   const motifLower = motif.toLowerCase();
 
   const symbolsSnap = await getDocs(collection(db, "symbols"));

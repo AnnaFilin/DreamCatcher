@@ -61,5 +61,14 @@
   },
   "user": {
     "anonymous": "Anonymous"
+  },
+
+  "toasts": {
+    "interpretationSaved": "Interpretation saved successfully.",
+    "interpretationError": "Failed to generate interpretation.",
+    "transcriptionError": "⚠️ The transcription couldn't be processed. Please try again.",
+    "dreamEmpty": "Dream text is empty.",
+    "dreamSaved": "Dream saved successfully.",
+    "dreamSaveError": "Failed to save the dream."
   }
 }

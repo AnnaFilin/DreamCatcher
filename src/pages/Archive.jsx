@@ -5,8 +5,8 @@ import SnippetCard from "../features/snippets/SnippetCard";
 import MotifFilterBlock from "../features/archive/MotifFilterBlock";
 import PageHeader from "../layout/PageHeader";
 import PageWrapper from "../layout/PageWrapper";
-import { fetchSnippets } from "../features/snippets/SnippetSlice";
-import { fetchMotifs } from "../features/motifs/MotifsSlice";
+import { fetchSnippets } from "../store/SnippetSlice";
+import { fetchMotifs } from "../store/MotifsSlice";
 
 const ArchivePage = () => {
   const { t } = useTranslation();
@@ -33,12 +33,8 @@ const ArchivePage = () => {
     setSortOrder("newest");
   };
 
-  const toggleMotif = (motif) => {
-    if (selectedMotif === motif) {
-      setSelectedMotif(null);
-    } else {
-      setSelectedMotif(motif);
-    }
+  const toggleMotif = (label) => {
+    setSelectedMotif((prev) => (prev === label ? null : label));
   };
 
   const filteredSnippets = allSnippets

@@ -59,5 +59,14 @@
     "no_key_motifs": "אין עדיין מוטיבים מרכזיים.",
     "add_more_dreams": "הוסף עוד חלומות כדי לחשוף דפוסים נסתרים."
   },
-  "anonymous": "אנונימי"
+  "anonymous": "אנונימי",
+
+  "toasts": {
+    "interpretationSaved": "הפרשנות נשמרה בהצלחה.",
+    "interpretationError": "נכשל ביצירת הפרשנות.",
+    "transcriptionError": "⚠️ לא ניתן היה לעבד את התמלול. נסה שוב.",
+    "dreamEmpty": "טקסט החלום ריק.",
+    "dreamSaved": "החלום נשמר בהצלחה.",
+    "dreamSaveError": "נכשל בשמירת החלום."
+  }
 }

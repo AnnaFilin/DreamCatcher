@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import snippetReducer from "../features/snippets/SnippetSlice";
-import motifsReducer from "../features/motifs/MotifsSlice";
+import snippetReducer from "./SnippetSlice";
+import motifsReducer from "./MotifsSlice";
 import userReducer from "./userSlice";
 
 export const store = configureStore({

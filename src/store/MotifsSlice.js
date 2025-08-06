@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { doc, getDoc } from "firebase/firestore";
-import { auth, db } from "../../firebase/firebase";
+import { auth, db } from "../firebase/firebase";
 
 export const fetchMotifs = createAsyncThunk("motifs/fetchMotifs", async () => {
   const uid = auth.currentUser?.uid;
@@ -14,7 +14,10 @@ export const fetchMotifs = createAsyncThunk("motifs/fetchMotifs", async () => {
   }
 
   const data = motifsSnap.data();
-  return data.motifs || [];
+
+  return (data.motifs || []).map((m) =>
+    typeof m === "string" ? { value: m, count: 1 } : m
+  );
 });
 
 const motifsSlice = createSlice({
