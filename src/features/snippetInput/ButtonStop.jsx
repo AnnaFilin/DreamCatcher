@@ -5,7 +5,7 @@ import {
   themeSpacing,
   themeEffects,
 } from "../../utils/themeTokens";
-import { MicIcon } from "./ButtonStart";
+import { MicIcon } from "../icons/MicIcon";
 
 const ButtonStop = ({ onClick, variant, isRecording }) => {
   const { t } = useTranslation();
@@ -21,13 +21,16 @@ const ButtonStop = ({ onClick, variant, isRecording }) => {
           ${themeEffects.iconButton.active}
         `}
       >
-        {isRecording && (
-          <>
-            <span className="absolute w-10 h-10 rounded-full bg-red-500 opacity-70 animate-ping" />
-            <span className="absolute w-2.5 h-2.5 rounded-full bg-red-500" />
-          </>
-        )}
-        <MicIcon className="w-7 h-7 opacity-90 stroke-[1.4] text-red-500" />
+        <MicIcon
+          className={`
+    w-7 h-7 stroke-[1.4] transition-all duration-700 ease-in-out
+    ${
+      isRecording
+        ? "text-white/90 drop-shadow-[0_0_12px_rgba(255,255,255,0.6)] animate-pulse"
+        : "text-white/60"
+    }
+  `}
+        />
       </button>
     );
   }
@@ -46,14 +49,16 @@ const ButtonStop = ({ onClick, variant, isRecording }) => {
         ${themeEffects.button.active}
         `}
     >
-      {isRecording && (
-        <>
-          <span className="absolute w-10 h-10 rounded-full bg-red-500 opacity-70 animate-ping" />
-          <span className="absolute w-2.5 h-2.5 rounded-full bg-red-500" />
-        </>
-      )}
-
-      <MicIcon className="w-5 h-5 opacity-80" />
+      <MicIcon
+        className={`
+    w-5 h-5 stroke-[1.4] transition-all duration-700 ease-in-out
+    ${
+      isRecording
+        ? "text-white/90 drop-shadow-[0_0_12px_rgba(255,255,255,0.6)] animate-pulse"
+        : "text-white/60"
+    }
+  `}
+      />
       {t("buttons.stop")}
     </button>
   );

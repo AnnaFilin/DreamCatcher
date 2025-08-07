@@ -27,9 +27,11 @@ const SnippetInput = () => {
   const [isLucid, setIsLucid] = useState(false);
   const [vividness, setVividness] = useState("");
   const [isSaving, setIsSaving] = useState(false);
+  const [isProcessingAudio, setIsProcessingAudio] = useState(false);
 
   const { startRecording, stopRecording, isRecording } = useVoiceRecorder({
     onResult: (result) => {
+      setIsProcessingAudio(false);
       if (typeof result === "string" && result.trim()) {
         setText((prev) => `${prev} ${result.trim()}`);
       } else {
@@ -80,31 +82,50 @@ const SnippetInput = () => {
     }
   };
 
+  const handleStopRecording = async () => {
+    setIsProcessingAudio(true);
+    await stopRecording();
+  };
+
   return (
     <div className="flex flex-col flex-grow">
-      <textarea
-        value={typeof text === "string" ? text : ""}
-        onChange={(e) => setText(e.target.value)}
-        placeholder={t("dream_input.placeholder")}
-        className={`
-                w-full h-full resize-none custom-scrollbar scrollbar-stable  overflow-y-auto
-                ${themeSpacing.textarea.padding}
-                ${themeFonts.input}
-                ${themeBorders.input}
-                ${themeBackgrounds.input}
-                ${themeRadii.lg}
-                ${themeEffects.input.base}
-                ${themeEffects.input.hover}
-                ${themeEffects.input.focus} 
-              `}
-      />
+      <div className="relative w-full h-full">
+        <textarea
+          value={typeof text === "string" ? text : ""}
+          onChange={(e) => setText(e.target.value)}
+          placeholder={t("dream_input.placeholder")}
+          className={`
+      w-full h-full resize-none custom-scrollbar scrollbar-stable overflow-y-auto
+      ${themeSpacing.textarea.padding}
+      ${themeFonts.input}
+      ${themeBorders.input}
+      ${themeBackgrounds.input}
+      ${themeRadii.lg}
+      ${themeEffects.input.base}
+      ${themeEffects.input.hover}
+      ${themeEffects.input.focus} 
+    `}
+        />
+
+        {isProcessingAudio && (
+          <div className="absolute inset-0 flex items-center justify-center  z-10 pointer-events-none">
+            <div className="flex items-center gap-3">
+              <Spinner className="w-5 h-5 text-white/70 animate-spin" />
+              <span className="text-white/60 text-sm">
+                {t("loading.transcribing")}
+              </span>
+            </div>
+          </div>
+        )}
+      </div>
+
       {/* Mobile layout */}
       <div className="flex flex-col gap-4 sm:hidden mt-4">
         <div className="flex items-center justify-between gap-12 w-full">
           {!isRecording ? (
             <ButtonStart onClick={startRecording} variant="icon" />
           ) : (
-            <ButtonStop onClick={stopRecording} variant="icon" />
+            <ButtonStop onClick={handleStopRecording} variant="icon" />
           )}
           <LucidVividnessControls
             isLucid={isLucid}
@@ -114,7 +135,7 @@ const SnippetInput = () => {
           />
         </div>
 
-        {isSaving ? (
+        {isSaving || isRecording || isProcessingAudio ? (
           <div className="flex justify-center items-center w-full h-10">
             <Spinner className="w-6 h-6 text-white/50" />
           </div>
@@ -142,9 +163,15 @@ const SnippetInput = () => {
             ) : !isRecording ? (
               <ButtonStart onClick={startRecording} />
             ) : (
-              <ButtonStop onClick={stopRecording} isRecording={isRecording} />
+              <ButtonStop
+                onClick={handleStopRecording}
+                isRecording={isRecording}
+              />
             )}
-            <ButtonSave onClick={handleAdd} />
+            <ButtonSave
+              onClick={handleAdd}
+              disabled={isRecording || isSaving}
+            />
           </div>
         </div>
       )}

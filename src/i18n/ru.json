@@ -67,5 +67,8 @@
     "dreamEmpty": "Текст сна пуст.",
     "dreamSaved": "Сон успешно сохранён.",
     "dreamSaveError": "Не удалось сохранить сон."
+  },
+  "loading": {
+    "transcribing": "Обработка аудио..."
   }
 }

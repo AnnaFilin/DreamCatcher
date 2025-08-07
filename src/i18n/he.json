@@ -68,5 +68,8 @@
     "dreamEmpty": "טקסט החלום ריק.",
     "dreamSaved": "החלום נשמר בהצלחה.",
     "dreamSaveError": "נכשל בשמירת החלום."
+  },
+  "loading": {
+    "transcribing": "מעבד את ההקלטה..."
   }
 }

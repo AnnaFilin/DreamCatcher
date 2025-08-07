@@ -70,5 +70,8 @@
     "dreamEmpty": "Dream text is empty.",
     "dreamSaved": "Dream saved successfully.",
     "dreamSaveError": "Failed to save the dream."
+  },
+  "loading": {
+    "transcribing": "Transcribing audio..."
   }
 }
