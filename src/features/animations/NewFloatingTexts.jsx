@@ -160,7 +160,7 @@ function FloatingText({ item, onRemove }) {
       className=" leading-snug
   tracking-tight
   italic
- font-thin  font-marck"
+ font-thin  font-manrope"
       style={{
         ...style,
         position: "fixed",

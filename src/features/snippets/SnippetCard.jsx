@@ -61,8 +61,8 @@ const SnippetCard = ({ snippet }) => {
       tracking-tight
       italic
       font-thin
-      font-marck
-    "
+  font-manrope 
+      "
         >
           {snippet.text}
         </p>
@@ -70,7 +70,7 @@ const SnippetCard = ({ snippet }) => {
         <p
           className="
       text-white/60
-      tracking-normal
+      tracking-normal  font-thin
       font-manrope italic
       "
         >

@@ -8,6 +8,7 @@ export const useVoiceRecorder = ({
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
   const [isRecording, setIsRecording] = useState(false);
+  const baseUrl = import.meta.env.VITE_BASE_API_URL;
 
   const startRecording = async () => {
     try {
@@ -50,16 +51,10 @@ export const useVoiceRecorder = ({
         formData.append("language", language);
 
         try {
-          const response = await fetch(
-            "https://api.openai.com/v1/audio/transcriptions",
-            {
-              method: "POST",
-              headers: {
-                Authorization: `Bearer ${import.meta.env.VITE_OPENAI_API_KEY}`,
-              },
-              body: formData,
-            }
-          );
+          const response = await fetch(`${baseUrl}/whisper`, {
+            method: "POST",
+            body: formData,
+          });
 
           const data = await response.json();
           console.log("🔤 Whisper result:", data);

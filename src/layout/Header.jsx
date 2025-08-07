@@ -20,8 +20,10 @@ import AvatarFallback from "./AvatarFallback";
 
 const Header = () => {
   const [user] = useAuthState(auth);
+
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const isFakeGoogleAvatar = user?.photoURL?.includes("googleusercontent.com");
 
   const { isModalOpen, setIsModalOpen } = useContext(DreamContext);
   const isMobile = useMediaQuery("(max-width: 639px)");
@@ -131,15 +133,16 @@ const Header = () => {
 
           {!user ? (
             <div className="flex items-center gap-3">
-              <NavLink
-                to="/register"
+              <button
+                onClick={() => navigate("/register")}
                 className="
-                  uppercase text-xs tracking-widest transition
-                  text-white/70 hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]
-                "
+    uppercase text-xs tracking-widest transition
+    text-white/70 hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]
+  "
               >
                 {t("buttons.sign_up")}
-              </NavLink>
+              </button>
+
               <LoginButton />
             </div>
           ) : (
@@ -158,14 +161,14 @@ const Header = () => {
                 {t("buttons.sign_out")}
               </button>
 
-              {user?.photoURL ? (
+              {user?.photoURL && !isFakeGoogleAvatar ? (
                 <img
                   src={user.photoURL}
-                  alt={user.displayName}
+                  alt={user.displayName || "User"}
                   className="w-10 h-10 rounded-full object-cover shrink-0"
                 />
               ) : (
-                <AvatarFallback name={user.displayName || "User"} size={40} />
+                <AvatarFallback name={user.displayName || user.email || "U"} />
               )}
             </div>
           )}

@@ -17,7 +17,11 @@ const InterpretationControls = ({
 
   useEffect(() => {
     if (forceShow) {
-      setShowAll(true);
+      const timer = setTimeout(() => {
+        setShowAll(true);
+      }, 0);
+
+      return () => clearTimeout(timer);
     }
   }, [forceShow]);
 

@@ -12,7 +12,7 @@ const DreamTextBlock = ({ text }) => {
           ${
             isLargeScreen
               ? `
-            font-marck
+              font-manrope
             font-thin
             text-left
             leading-[1.7]

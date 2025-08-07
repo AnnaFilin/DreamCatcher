@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { DreamContext } from "../../contexts/DreamContext";
 import { db } from "../../firebase/firebase";
 import i18n from "../../i18n/i18n";
-// import { generateDreamInterpretationMock } from "../../utils/generateDreamInterpretationMock";
 import { generateDreamInterpretation } from "../../utils/generateDreamInterpretation";
 
 import { doc, getDoc } from "firebase/firestore";

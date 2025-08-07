@@ -37,7 +37,7 @@ export default function Home() {
               <div className="absolute -inset-2 bg-white opacity-5 blur-2xl rounded-2xl pointer-events-none z-0" />
               <div
                 className={`
-            relative z-10 w-full h-full flex flex-col
+            relative z-10 w-full h-full flex flex-col overflow-hidden
             ${themeColors.blockBg}
             ${themeColors.blockBlur}
             ${themeColors.blockBorder}

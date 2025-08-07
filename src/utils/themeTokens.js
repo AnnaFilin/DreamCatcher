@@ -63,7 +63,7 @@ export const themeFonts = {
   labelMuted: "text-xs uppercase text-white/60 hover:text-white/80",
   linkSubtle: "text-sm underline text-white/60 hover:text-white",
   input: "text-sm font-sora text-white/80 leading-relaxed placeholder-white/40",
-  controlLabel: "text-xs text-white/50 leading-none", // десктоп/основной
+  controlLabel: "text-xs text-white/50 leading-none",
   controlLabelMobile: "text-[10px] text-white/50 leading-none",
 };
 

@@ -9,14 +9,16 @@ const About = () => {
 
   return (
     <PageWrapper>
-      <PageHeader title={t("about.title")} />
+      <div className="relative z-10">
+        <PageHeader title={t("about.title")} />
 
-      <div className={`${themeFonts.subtitle} space-y-4`}>
-        {t("about.description")
-          .split("\n\n")
-          .map((paragraph, index) => (
-            <p key={index}>{paragraph}</p>
-          ))}
+        <div className={`${themeFonts.subtitle} space-y-4`}>
+          {t("about.description")
+            .split("\n\n")
+            .map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
+        </div>
       </div>
     </PageWrapper>
   );
