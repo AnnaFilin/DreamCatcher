@@ -22,6 +22,16 @@ The goal is not only to record dreams, but to help users notice recurring motifs
 
 ---
 
+### Screenshots
+
+**Home Screen (with floating motifs)**  
+![Home Screen](./screenshots/home.png)
+
+**Dream Interpretation Modal**  
+![Dream Modal](./screenshots/modal.png)
+
+---
+
 ## About the AI
 
 The AI features are part of the core application architecture — not plug-and-play add-ons.
@@ -92,10 +102,17 @@ Planned features and improvements:
 - **Lucid dreaming resources hub** — create a dedicated section with information, research links, and practical techniques related to lucid dreaming, along with the shared motif database.
 - **Email & password sign-in** — add traditional auth alongside Google.
 - **Password reset & email verification** — support resetting passwords (sendPasswordResetEmail) and optional email verification for new accounts.
+- **Improved responsive design** — polish mobile/tablet layouts, especially for modals and controls.
+- **Refined motif analysis** — improve semantic similarity checks to avoid duplicates that differ only slightly in wording.
+- **UI/UX enhancements for modal windows** — more consistent spacing, typography, and interaction behavior.
+- **Code refactoring** — clean up and optimize components, extract reusable parts, remove redundant logic, and improve file structure.
+- **Backend proxy migration** — move all OpenAI API calls to serverless functions (Vercel) to hide API keys and improve security.
+- **Performance optimization** — lazy load components where possible, reduce bundle size, and optimize rendering of large dream archives.
+- **Extended testing** — add automated tests for key logic (motif detection, AI interpretation saving, authentication flows).
 
 ---
 
 ## Author
 
-Designed, coded, and maintained by [Anna Filin](https://www.linkedin.com/in/anna-filin-39228662/), a frontend developer with 5+ years of experience (Vue, React, SwiftUI).  
+Designed, coded, and maintained by [Anna Filin](https://www.linkedin.com/in/anna-filin-39228662/), a frontend developer with 5+ years of experience Vue, React, SwiftUI.  
 In addition to building all UI, state management, and integrations from scratch, I work with generative AI tools to speed up prototyping, refine text content, and design AI prompts for application features — ensuring all outputs are reviewed, adapted, and integrated manually.

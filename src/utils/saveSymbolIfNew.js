@@ -30,11 +30,9 @@ export async function saveSymbolIfNew(motif) {
   });
 
   if (existing.length > 0) {
-    console.log(`🛑 Symbol "${motif}" already represented as:`, existing);
     return;
   }
 
-  console.log(`📌 Adding new motif to /symbols with GPT: ${motif}`);
   const { arch, meaning } = await fetchSymbolMeta(motif, ALLOWED_ARCHETYPES);
 
   const symbolRef = doc(db, "symbols", motif);
@@ -44,6 +42,4 @@ export async function saveSymbolIfNew(motif) {
     meaning,
     createdAt: serverTimestamp(),
   });
-
-  console.log("✅ Symbol saved:", motif);
 }

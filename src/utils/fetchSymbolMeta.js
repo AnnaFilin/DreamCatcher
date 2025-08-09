@@ -19,6 +19,5 @@ export async function fetchSymbolMeta(motif, allowedArchetypes) {
     throw new Error(data?.error || "Failed to get symbol meta");
   }
 
-  console.log("✅ Symbol Meta:", data);
   return data;
 }

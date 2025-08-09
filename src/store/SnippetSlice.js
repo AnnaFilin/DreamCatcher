@@ -107,10 +107,6 @@ export const addSnippet = createAsyncThunk(
 
       const motifsFromGPT = await getMotifs(safeText, knownValues);
 
-      // console.log("🧠 GPT motifs:", motifsFromGPT);
-      // console.log("📌 Known motifs (user):", userMotifValues);
-      // console.log("🌐 Global motifs:", globalMotifIds);
-
       const motifsForSnippet = [];
       const updatedMotifs = [...existingMotifs];
 
@@ -140,9 +136,6 @@ export const addSnippet = createAsyncThunk(
         }
       }
 
-      // console.log("🔁 Final motifs for snippet:", motifsForSnippet);
-      // console.log("🧾 Updated meta.motifs:", updatedMotifs);
-
       await setDoc(motifsDocRef, { motifs: updatedMotifs });
 
       const docRef = await addDoc(collection(db, "users", uid, "snippets"), {
@@ -155,8 +148,6 @@ export const addSnippet = createAsyncThunk(
 
         createdAt: serverTimestamp(),
       });
-
-      // console.log("✅ Snippet saved with ID:", docRef.id);
 
       return {
         id: docRef.id,

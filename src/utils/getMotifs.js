@@ -19,6 +19,5 @@ export async function getMotifs(text, knownMotifs) {
     throw new Error(data?.error || "Failed to extract motifs");
   }
 
-  console.log("✅ Motifs:", data.motifs);
   return data.motifs;
 }
