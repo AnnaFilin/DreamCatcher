@@ -18,6 +18,9 @@ import { useMediaQuery } from "../hooks/useMediaQuery";
 import { DreamContext } from "../contexts/DreamContext";
 import AvatarFallback from "./AvatarFallback";
 
+const CANONICAL_ORIGIN =
+  import.meta.env.VITE_PUBLIC_BASE_URL || "https://www.dreamcatcherlog.app";
+
 const Header = () => {
   const [user] = useAuthState(auth);
 
@@ -38,12 +41,10 @@ const Header = () => {
   };
 
   const handleSignOut = async () => {
-    await signOut(auth);
-
-    if (!import.meta.env.VITE_IS_PROD) {
-      navigate("/welcome");
-    } else {
-      window.location.href = "/welcome";
+    try {
+      await signOut(auth);
+    } finally {
+      window.location.assign(`${CANONICAL_ORIGIN}/welcome`);
     }
   };
 

@@ -1,3 +1,10 @@
+if (location.hostname === "dreamcatcherlog.app") {
+  const { pathname, search, hash } = location;
+  location.replace(
+    `https://www.dreamcatcherlog.app${pathname}${search}${hash}`
+  );
+}
+
 import React from "react";
 
 import ReactDOM from "react-dom/client";
