@@ -44,7 +44,7 @@ const Header = () => {
     try {
       await signOut(auth);
     } finally {
-      window.location.assign(`${CANONICAL_ORIGIN}/welcome`);
+      window.location.assign(`${CANONICAL_ORIGIN}`);
     }
   };
 
