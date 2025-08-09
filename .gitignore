@@ -26,3 +26,5 @@ dist-ssr
 # .gitignore
 .env
 .vercel
+/src/utils/generateDreamInterpretationMock.js
+/src/firebase/symbols-seed.json
