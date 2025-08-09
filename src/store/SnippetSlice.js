@@ -15,6 +15,7 @@ import {
 import { auth, db } from "../firebase/firebase";
 import { getMotifs } from "../utils/getMotifs";
 import { saveSymbolIfNew } from "../utils/saveSymbolIfNew";
+import { validateDreamText } from "../utils/sanitize";
 
 export const fetchSnippets = createAsyncThunk(
   "snippets/fetchSnippets",
@@ -76,6 +77,14 @@ export const addSnippet = createAsyncThunk(
     const uid = auth.currentUser?.uid;
     if (!uid) throw new Error("Not authenticated");
 
+    const checked = validateDreamText(text);
+    if (!checked.ok) {
+      throw new Error(
+        checked.reason === "too_short" ? "Dream too short" : "Dream too long"
+      );
+    }
+    const safeText = checked.value;
+
     try {
       const motifsDocRef = doc(db, "users", uid, "meta", "motifs");
 
@@ -96,7 +105,7 @@ export const addSnippet = createAsyncThunk(
 
       const knownValues = [...new Set([...userMotifValues, ...globalMotifIds])];
 
-      const motifsFromGPT = await getMotifs(text, knownValues);
+      const motifsFromGPT = await getMotifs(safeText, knownValues);
 
       // console.log("🧠 GPT motifs:", motifsFromGPT);
       // console.log("📌 Known motifs (user):", userMotifValues);
@@ -137,7 +146,7 @@ export const addSnippet = createAsyncThunk(
       await setDoc(motifsDocRef, { motifs: updatedMotifs });
 
       const docRef = await addDoc(collection(db, "users", uid, "snippets"), {
-        text,
+        text: safeText,
         isLucid,
         vividness,
         motifs: motifsForSnippet.map((m) =>
@@ -151,7 +160,7 @@ export const addSnippet = createAsyncThunk(
 
       return {
         id: docRef.id,
-        text,
+        text: safeText,
         isLucid,
         vividness,
         motifs: motifsForSnippet,

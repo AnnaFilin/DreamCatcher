@@ -3,7 +3,7 @@ import Header from "./Header";
 
 const PublicLayout = () => {
   return (
-    <div className="relative min-h-screen flex flex-col overflow-hidden text-gray-100 font-sora">
+    <div className="relative min-h-screen flex flex-col overflow-hidden text-gray-100 font-sans">
       <div className="absolute inset-0 bg-[--color-background] bg-texture-linen"></div>
 
       <div className="absolute top-1/2 left-1/3 w-[400px] h-[400px] rounded-full bg-indigo-500 opacity-20 blur-[150px] pointer-events-none z-30"></div>

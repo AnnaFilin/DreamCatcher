@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+.font-sans {
+  font-family: "Manrope", "Rubik", system-ui, "Segoe UI", Arial, sans-serif;
+}
+
 :root {
   --color-dark: #2d2330;
   --color-light: #f7f5ed;
@@ -131,49 +135,14 @@ main {
 }
 
 @font-face {
-  font-family: "Sora";
-  src: url("/fonts/sora-light.woff2") format("woff2");
-  font-weight: 300;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Sora";
-  src: url("/fonts/sora-regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Sora";
-  src: url("/fonts/sora-semibold.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-}
-
-@font-face {
   font-family: "Manrope";
   src: url("/fonts/manrope-light.woff2") format("woff2");
   font-weight: 300;
   font-style: normal;
 }
-
-@font-face {
-  font-family: "Noto Sans EC ExtraLight";
-  src: url("/fonts/nato-thin.woff2") format("woff2");
-  font-weight: 200;
-  font-style: normal;
-}
 @font-face {
   font-family: "Manrope";
   src: url("/fonts/manrope-regular.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Marck Script";
-  src: url("/fonts/marcks-regular.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
 }
@@ -185,21 +154,28 @@ main {
   font-style: normal;
 }
 
-.font-rubik {
-  font-family: "Rubik", sans-serif;
+@font-face {
+  font-family: "Noto Sans EC ExtraLight";
+  src: url("/fonts/nato-thin.woff2") format("woff2");
+  font-weight: 200;
+  font-style: normal;
 }
 
-.font-sora {
-  font-family: "Sora", "Manrope", sans-serif;
-}
 .font-manrope {
   font-family: "Manrope", sans-serif;
 }
-.font-marck {
-  font-family: "Marck Script", cursive;
+.font-rubik {
+  font-family: "Rubik", sans-serif;
 }
 .font-nato {
   font-family: "Noto Sans EC ExtraLight", sans-serif;
+}
+
+:lang(he) .font-sans {
+  font-family: "Rubik", "Manrope", system-ui, "Segoe UI", Arial, sans-serif;
+}
+:lang(he) {
+  direction: rtl;
 }
 
 .animated-dream {
@@ -209,4 +185,16 @@ main {
   animation: dreamPresence 42s ease-in-out forwards;
   color: rgba(255, 255, 255, 0.8);
   text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+}
+
+.about-text {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (min-width: 1280px) {
+  .about-text {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
 }

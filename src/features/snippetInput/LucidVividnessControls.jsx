@@ -2,6 +2,7 @@ import { useState } from "react";
 import EyeIcon from "../icons/EyeIcon";
 import VividnessIcon from "../icons/VividnessIcon";
 import { themeEffects, themeFonts } from "../../utils/themeTokens";
+import { useTranslation } from "react-i18next";
 
 const TooltipButton = ({ label, active, onClick, children }) => {
   const [showTooltip, setShowTooltip] = useState(false);
@@ -53,10 +54,12 @@ export default function LucidVividnessControls({
   vividness,
   setVividness,
 }) {
+  const { t } = useTranslation();
+
   return (
     <div className="flex w-full items-start gap-4 justify-between">
       <TooltipButton
-        label="Lucid?"
+        label={t("input.lucid")}
         active={isLucid}
         onClick={() => setIsLucid(!isLucid)}
       >
@@ -78,10 +81,10 @@ export default function LucidVividnessControls({
         </div>
 
         <span className={`md:hidden mt-1 ${themeFonts.controlLabelMobile}`}>
-          Select dream vividness
+          {t("input.vividness")}
         </span>
         <span className={`hidden md:inline mt-1 ${themeFonts.controlLabel}`}>
-          Select dream vividness
+          {t("input.vividness")}
         </span>
       </div>
     </div>

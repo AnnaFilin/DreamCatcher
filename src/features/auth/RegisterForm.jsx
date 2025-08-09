@@ -120,7 +120,6 @@ const RegisterForm = () => {
               border border-white/20
               ${themeRadii.sm}
               text-white/80
-              font-sora
               font-medium
               tracking-wide
               ${themeEffects.button.base}

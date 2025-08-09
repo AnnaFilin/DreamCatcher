@@ -20,6 +20,7 @@ import { useMediaQuery } from "../../hooks/useMediaQuery";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import i18n from "../../i18n/i18n";
+import { validateDreamText, cleanString, LIMITS } from "../../utils/sanitize";
 
 const SnippetInput = () => {
   const { t } = useTranslation();
@@ -32,8 +33,14 @@ const SnippetInput = () => {
   const { startRecording, stopRecording, isRecording } = useVoiceRecorder({
     onResult: (result) => {
       setIsProcessingAudio(false);
-      if (typeof result === "string" && result.trim()) {
-        setText((prev) => `${prev} ${result.trim()}`);
+
+      if (typeof result === "string") {
+        const cleaned = cleanString(result);
+        if (cleaned) {
+          setText((prev) => `${prev ? prev + " " : ""}${cleaned}`);
+        } else {
+          toast.warn(t("toasts.transcriptionError"));
+        }
       } else {
         toast.warn(t("toasts.transcriptionError"));
       }
@@ -48,16 +55,22 @@ const SnippetInput = () => {
   const knownMotifs = useSelector((state) => state.motifs.motifs);
 
   const handleAdd = async () => {
-    if (!text.trim()) {
-      toast.warn(t("toasts.dreamEmpty"));
+    const checked = validateDreamText(text);
+    if (!checked.ok) {
+      if (checked.reason === "too_short") {
+        toast.warn(t("toasts.dreamEmpty"));
+      } else if (checked.reason === "too_long") {
+        toast.warn(t("toasts.dreamTooLong") || "Dream is too long");
+      }
       return;
     }
+    const safeText = checked.value;
 
     try {
       setIsSaving(true);
       await dispatch(
         addSnippet({
-          text,
+          text: safeText,
           isLucid,
           vividness,
           knownMotifs: knownMotifs || [],
@@ -94,6 +107,7 @@ const SnippetInput = () => {
           value={typeof text === "string" ? text : ""}
           onChange={(e) => setText(e.target.value)}
           placeholder={t("dream_input.placeholder")}
+          maxLength={LIMITS.max}
           className={`
       w-full h-full resize-none custom-scrollbar scrollbar-stable overflow-y-auto
       ${themeSpacing.textarea.padding}
@@ -140,7 +154,11 @@ const SnippetInput = () => {
             <Spinner className="w-6 h-6 text-white/50" />
           </div>
         ) : (
-          <ButtonSave onClick={handleAdd} fullWidth />
+          <ButtonSave
+            onClick={handleAdd}
+            fullWidth
+            disabled={isRecording || isSaving || isProcessingAudio}
+          />
         )}
       </div>
 
@@ -170,7 +188,7 @@ const SnippetInput = () => {
             )}
             <ButtonSave
               onClick={handleAdd}
-              disabled={isRecording || isSaving}
+              disabled={isRecording || isSaving || isProcessingAudio}
             />
           </div>
         </div>

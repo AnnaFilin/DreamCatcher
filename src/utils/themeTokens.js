@@ -50,7 +50,7 @@ export const themeFonts = {
 `,
 
   title: `
-  font-sora font-light tracking-tight
+  font-light tracking-tight
   text-3xl sm:text-4xl md:text-5xl
   text-white/80
 `,

@@ -3,6 +3,7 @@ import LucidToggle from "./LucidToggle";
 import SearchField from "./SearchField";
 import MotifSelector from "./MotifSelector";
 import { lucidControlClass } from "../../utils/themeTokens";
+import { useTranslation } from "react-i18next";
 
 const MotifFilterBlock = ({
   lucidOnly,
@@ -14,6 +15,7 @@ const MotifFilterBlock = ({
   toggleMotif,
 }) => {
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -32,7 +34,7 @@ const MotifFilterBlock = ({
           onClick={() => setFiltersOpen(!filtersOpen)}
           className="md:hidden text-sm text-white/60 underline"
         >
-          {filtersOpen ? "Hide Filters" : "Show Filters"}
+          {filtersOpen ? t("filters.hide") : t("filters.show")}
         </button>
       </div>
 
@@ -58,7 +60,7 @@ const MotifFilterBlock = ({
           <div className="flex items-center justify-between">
             <LucidToggle lucidOnly={lucidOnly} setLucidOnly={setLucidOnly} />
             <button onClick={resetFilters} className={lucidControlClass}>
-              Reset
+              {t("filters.reset")}
             </button>
           </div>
         </div>

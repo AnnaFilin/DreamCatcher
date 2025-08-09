@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import SnippetCard from "../features/snippets/SnippetCard";
 import MotifFilterBlock from "../features/archive/MotifFilterBlock";
@@ -7,6 +7,7 @@ import PageHeader from "../layout/PageHeader";
 import PageWrapper from "../layout/PageWrapper";
 import { fetchSnippets } from "../store/SnippetSlice";
 import { fetchMotifs } from "../store/MotifsSlice";
+import { cleanString } from "../utils/sanitize";
 
 const ArchivePage = () => {
   const { t } = useTranslation();
@@ -37,18 +38,26 @@ const ArchivePage = () => {
     setSelectedMotif((prev) => (prev === label ? null : label));
   };
 
-  const filteredSnippets = allSnippets
-    .filter((s) => !lucidOnly || s.isLucid)
-    .filter((s) => s.text.toLowerCase().includes(searchQuery.toLowerCase()))
-    .filter(
-      (s) => !selectedMotif || (s.motifs && s.motifs.includes(selectedMotif))
-    );
+  const filteredSnippets = useMemo(() => {
+    const q = cleanString(searchQuery).toLowerCase();
 
-  const sortedSnippets = [...filteredSnippets].sort((a, b) =>
-    sortOrder === "newest"
-      ? b.createdAt - a.createdAt
-      : a.createdAt - b.createdAt
-  );
+    return allSnippets
+      .filter((s) => !lucidOnly || s.isLucid)
+      .filter((s) => (q ? s.text.toLowerCase().includes(q) : true))
+      .filter((s) =>
+        !selectedMotif
+          ? true
+          : Array.isArray(s.motifs) && s.motifs.includes(selectedMotif)
+      );
+  }, [allSnippets, lucidOnly, searchQuery, selectedMotif]);
+
+  const sortedSnippets = useMemo(() => {
+    return [...filteredSnippets].sort((a, b) =>
+      sortOrder === "newest"
+        ? b.createdAt - a.createdAt
+        : a.createdAt - b.createdAt
+    );
+  }, [filteredSnippets, sortOrder]);
 
   return (
     <PageWrapper>

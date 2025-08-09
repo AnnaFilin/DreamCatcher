@@ -27,10 +27,12 @@ const Layout = () => {
 
   return (
     <div
-      className={`
-        relative min-h-screen flex flex-col overflow-hidden text-gray-100
-        ${isHebrew ? "font-rubik" : "font-sora"}
-      `}
+      lang={i18n.language}
+      dir={isHebrew ? "rtl" : "ltr"}
+      className="
+       relative min-h-screen flex flex-col overflow-hidden text-gray-100
+        font-sans
+      "
     >
       <div className="absolute inset-0 bg-[--color-background] bg-texture-linen"></div>
 

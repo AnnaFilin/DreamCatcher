@@ -28,7 +28,7 @@ const WelcomePage = () => {
         </div>
       ) : (
         <div className="absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 px-6 text-center">
-          <h1 className="text-4xl text-white/60 font-sora font-light mb-4">
+          <h1 className="text-4xl text-white/60  font-light mb-4">
             {t("welcome.title")}
           </h1>
           <p className="text-white/60 max-w-md mx-auto">

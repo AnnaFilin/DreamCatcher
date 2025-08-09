@@ -57,7 +57,8 @@
   "placeholders": {
     "no_recent_dreams": "No dreams yet — your dream journal starts here!",
     "no_key_motifs": "No key motifs yet.",
-    "add_more_dreams": "Add more dreams to reveal hidden patterns."
+    "add_more_dreams": "Add more dreams to reveal hidden patterns.",
+    "search": "Search..."
   },
   "user": {
     "anonymous": "Anonymous"
@@ -73,5 +74,7 @@
   },
   "loading": {
     "transcribing": "Transcribing audio..."
-  }
+  },
+
+  "lucid.label": "Lucid"
 }

@@ -12,7 +12,7 @@ const About = () => {
       <div className="relative z-10">
         <PageHeader title={t("about.title")} />
 
-        <div className={`${themeFonts.subtitle} space-y-4`}>
+        <div className={`${themeFonts.subtitle} space-y-4 about-text`}>
           {t("about.description")
             .split("\n\n")
             .map((paragraph, index) => (

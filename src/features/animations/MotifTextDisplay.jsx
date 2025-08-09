@@ -19,7 +19,7 @@ export default function MotifTextDisplay({ motif }) {
       transition-all duration-500 ease-in-out
     "
     >
-      <h2 className="text-4xl font-sora font-light text-white/60 mb-4 tracking-tight">
+      <h2 className="text-4xl  font-light text-white/60 mb-4 tracking-tight">
         {formatTitle(motif.id)}
       </h2>
 
