@@ -139,7 +139,11 @@ const SnippetInput = () => {
           {!isRecording ? (
             <ButtonStart onClick={startRecording} variant="icon" />
           ) : (
-            <ButtonStop onClick={handleStopRecording} variant="icon" />
+            <ButtonStop
+              onClick={handleStopRecording}
+              isRecording={isRecording}
+              variant="icon"
+            />
           )}
           <LucidVividnessControls
             isLucid={isLucid}
@@ -149,7 +153,7 @@ const SnippetInput = () => {
           />
         </div>
 
-        {isSaving || isRecording || isProcessingAudio ? (
+        {isSaving ? (
           <div className="flex justify-center items-center w-full h-10">
             <Spinner className="w-6 h-6 text-white/50" />
           </div>
@@ -157,7 +161,7 @@ const SnippetInput = () => {
           <ButtonSave
             onClick={handleAdd}
             fullWidth
-            disabled={isRecording || isSaving || isProcessingAudio}
+            disabled={isRecording || isProcessingAudio}
           />
         )}
       </div>
@@ -188,7 +192,7 @@ const SnippetInput = () => {
             )}
             <ButtonSave
               onClick={handleAdd}
-              disabled={isRecording || isSaving || isProcessingAudio}
+              disabled={isRecording || isProcessingAudio}
             />
           </div>
         </div>

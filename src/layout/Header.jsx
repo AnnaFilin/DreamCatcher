@@ -5,7 +5,7 @@ import { signOut } from "firebase/auth";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   themeFonts,
   themeColors,
@@ -39,6 +39,10 @@ const Header = () => {
     const newLang = i18n.language === "en" ? "ru" : "en";
     i18n.changeLanguage(newLang);
   };
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [i18n.language, location.pathname]);
 
   const handleSignOut = async () => {
     try {
