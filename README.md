@@ -67,6 +67,21 @@ You can explore the live version here:
 
 ---
 
+## Demo Video
+
+🎥 Recorded demo (2.5 min): [Watch on YouTube](https://youtu.be/77Ad7wEgHjI)
+
+This demo shows the full flow:
+- Guest view → shared motifs (before sign-up)
+- Sign-up / sign-in
+- Adding a dream (voice or text)
+- AI interpretation
+- Personal motifs and history
+
+> Note: Recorded on desktop. Mobile layout may differ (e.g. iPhone SE). Some features require microphone/dictation permissions.
+
+---
+
 ## GitHub Repository
 
 The source code is available on GitHub:  
