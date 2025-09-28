@@ -7,18 +7,14 @@ The goal is not only to record dreams, but to help users notice recurring motifs
 
 ---
 
-## What it does
-
-- Write and save dreams with optional lucid/vividness tagging
-- **Floating common motifs** (visible only on the welcome screen for non-registered users), each with a temporary AI-generated Jungian interpretation on hover or click
-- For logged-in users, floating elements are short excerpts from their own dreams
-- Voice input and transcription using OpenAI Whisper — designed for quick capture of dreams immediately after waking, making it easier to record details before they fade
-- Per-dream AI interpretation using GPT-4 with custom archetype structures
+## Features
+- Dream journaling with tagging (lucid / vividness)
+- Voice input with OpenAI Whisper for quick capture
+- AI interpretation using GPT-4 with Jungian archetype structures
 - Motif analysis with shared database enrichment
-- Archive with search and motif filtering
 - Multilingual interface (English, Russian, Hebrew)
-- Firebase authentication (Google, planned Email/Password)
-- Responsive layout for desktop and mobile
+- Firebase authentication (Google; Email/Password planned)
+- Responsive design for desktop and mobile
 
 ---
 
@@ -82,6 +78,13 @@ This demo shows the full flow:
 
 ---
 
+## Known Issues / Notes
+- Layout may break on small devices (e.g. iPhone SE)
+- Some features require microphone/dictation permissions
+- Email/password authentication not yet implemented
+
+---
+
 ## GitHub Repository
 
 The source code is available on GitHub:  
@@ -103,27 +106,11 @@ You will need your own Firebase and OpenAI API credentials for AI features and a
 ---
 
 ## Future Plans
-
-Planned features and improvements:
-
-- **Dream frequency graph** — visualize the number of dreams recorded over time since starting to use the app.
-- **Sleep time tracking** — record hours slept for each dream to explore correlations with dream clarity and frequency.
-- **Personal motif dashboard** — display motifs most frequently appearing in a user’s dreams.
-- **Global motif trends** — show motifs most common across all users while keeping entries private.
-- **Shared motifs page for registered users** — make the current public motif display (now only visible on the welcome screen) accessible to logged-in users via a dedicated page, including AI-generated Jungian interpretations for each motif.
-- **Mobile app version** — transform Dreamcatcher into a full-featured mobile application for iOS and Android.
-- **User notifications for reality checks** — optional reminders and other tools throughout the day to encourage reality checks and awareness practices, customizable per user.
-- **Full multilingual support for motifs and interpretations** — expand language coverage beyond the interface so that motifs and AI-generated interpretations are also available in the user’s selected language, not just in English.
-- **Lucid dreaming resources hub** — create a dedicated section with information, research links, and practical techniques related to lucid dreaming, along with the shared motif database.
-- **Email & password sign-in** — add traditional auth alongside Google.
-- **Password reset & email verification** — support resetting passwords (sendPasswordResetEmail) and optional email verification for new accounts.
-- **Improved responsive design** — polish mobile/tablet layouts, especially for modals and controls.
-- **Refined motif analysis** — improve semantic similarity checks to avoid duplicates that differ only slightly in wording.
-- **UI/UX enhancements for modal windows** — more consistent spacing, typography, and interaction behavior.
-- **Code refactoring** — clean up and optimize components, extract reusable parts, remove redundant logic, and improve file structure.
-- **Backend proxy migration** — move all OpenAI API calls to serverless functions (Vercel) to hide API keys and improve security.
-- **Performance optimization** — lazy load components where possible, reduce bundle size, and optimize rendering of large dream archives.
-- **Extended testing** — add automated tests for key logic (motif detection, AI interpretation saving, authentication flows).
+- **Analytics:** dream frequency graphs, sleep time tracking, personal motif dashboard, global motif trends
+- **AI & Content:** refined motif analysis, full multilingual support, lucid dreaming resources hub
+- **UX & Mobile:** improved responsive design, dedicated shared motifs page, iOS/Android app, user notifications
+- **Auth & Security:** email/password sign-in, password reset, backend proxy for API security
+- **Engineering:** UI/UX refinements, performance optimization, code refactoring, automated testing
 
 ---
 
