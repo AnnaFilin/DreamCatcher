@@ -115,8 +115,9 @@ You will need your own Firebase and OpenAI API credentials for AI features and a
 ---
 
 ## Author
+
 Designed, coded, and maintained by **Anna Filin**, a frontend developer with 6+ years of experience (Vue, React, SwiftUI).  
-[LinkedIn](https://www.linkedin.com/in/anna-filin)
+📎 [LinkedIn Profile](https://www.linkedin.com/in/anna-filin)
 
 **My role in Dreamcatcher:**
 - Frontend engineering (React + Vite + Redux Toolkit + TailwindCSS)
@@ -125,6 +126,6 @@ Designed, coded, and maintained by **Anna Filin**, a frontend developer with 6+ 
 - Firebase setup (Auth, Firestore, deployment via Vercel)
 - Project architecture, state management, and feature development
 
-I also used generative AI tools to accelerate prototyping, refine text, and design AI prompts — but all architecture, logic, and UI implementation were coded manually.
-
+I also used generative AI tools to accelerate prototyping, refine text, and design AI prompts —  
+but all architecture, logic, and UI implementation were coded manually.
 
