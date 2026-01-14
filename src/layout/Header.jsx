@@ -72,7 +72,7 @@ const Header = () => {
             setMenuOpen(false);
 
             if (location.pathname === "/" && isModalOpen && isMobile) {
-              e.preventDefault();
+
               setIsModalOpen(false);
             }
           }}
@@ -88,10 +88,9 @@ const Header = () => {
                 className={({ isActive }) =>
                   `
                   uppercase text-xs tracking-widest transition
-                  ${
-                    isActive
-                      ? "text-white underline underline-offset-4"
-                      : "text-white/70 hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]"
+                  ${isActive
+                    ? "text-white underline underline-offset-4"
+                    : "text-white/70 hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]"
                   }
                   `
                 }
@@ -105,10 +104,9 @@ const Header = () => {
                 className={({ isActive }) =>
                   `
                   uppercase text-xs tracking-widest transition
-                  ${
-                    isActive
-                      ? "text-white underline underline-offset-4"
-                      : "text-white/70 hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]"
+                  ${isActive
+                    ? "text-white underline underline-offset-4"
+                    : "text-white/70 hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]"
                   }
                 `
                 }
@@ -121,10 +119,9 @@ const Header = () => {
               className={({ isActive }) =>
                 `
                 uppercase text-xs tracking-widest transition
-                ${
-                  isActive
-                    ? "text-white underline underline-offset-4"
-                    : "text-white/70 hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]"
+                ${isActive
+                  ? "text-white underline underline-offset-4"
+                  : "text-white/70 hover:text-white hover:drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]"
                 }
               `
               }
@@ -210,7 +207,7 @@ const Header = () => {
               onClick={(e) => {
                 setMenuOpen(false);
                 if (location.pathname === "/" && isModalOpen && isMobile) {
-                  e.preventDefault();
+
                   setIsModalOpen(false);
                 }
               }}
@@ -225,9 +222,9 @@ const Header = () => {
               onClick={(e) => {
                 setMenuOpen(false);
                 if (isModalOpen && isMobile) {
-                  e.preventDefault();
+
                   setIsModalOpen(false);
-                  navigate("/archive");
+
                 }
               }}
             >
@@ -240,9 +237,9 @@ const Header = () => {
             onClick={(e) => {
               setMenuOpen(false);
               if (isModalOpen && isMobile) {
-                e.preventDefault();
+
                 setIsModalOpen(false);
-                navigate("/about");
+
               }
             }}
           >

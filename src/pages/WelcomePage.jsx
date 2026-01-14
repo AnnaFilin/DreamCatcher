@@ -27,11 +27,11 @@ const WelcomePage = () => {
           <MotifTextDisplay motif={selectedMotif} />
         </div>
       ) : (
-        <div className="absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 px-6 text-center">
+        <div className="absolute top-1/2 left-1/2 z-20 -translate-x-1/2 -translate-y-1/2 px-6 text-center w-full sm:w-auto">
           <h1 className="text-4xl text-white/60  font-light mb-4">
             {t("welcome.title")}
           </h1>
-          <p className="text-white/60 max-w-md mx-auto">
+          <p className="text-white/60 max-w-full sm:max-w-md mx-auto">
             {t("welcome.description")}
           </p>
 
