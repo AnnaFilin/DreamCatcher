@@ -37,7 +37,7 @@ export const themeEffects = {
   },
   logoShadow: "drop-shadow-[0_0_16px_rgba(255,255,255,0.04)]",
   logoHover:
-    "hover:bg-white/10 hover:shadow-[0_2px_25px_rgba(255,255,255,0.15)]",
+    "hover:shadow-[0_2px_25px_rgba(255,255,255,0.15)]",
 };
 
 export const themeFonts = {
