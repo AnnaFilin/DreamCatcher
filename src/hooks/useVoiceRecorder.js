@@ -85,16 +85,31 @@ export const useVoiceRecorder = ({
           
 
           const data = await response.json();
-          console.log("🔤 Whisper result:", data);
 
-          if (typeof data.text === "string" && data.text.trim()) {
-            console.log("📥 Recognized text:", data.text);
+          onDebug?.({
+            stage: "whisper_raw",
+            raw: data,
+          });
+
+          if (typeof data?.text === "string" && data.text.trim()) {
             onResult(data.text);
-          } else {
-            // alert("❌ Whisper return empty");
-            onDebug?.({ stage: "whisper_empty" });
-// alert("❌ Whisper return empty");
+            return;
           }
+
+          if (Array.isArray(data?.segments) && data.segments.length) {
+            const joined = data.segments
+              .map(s => s.text)
+              .join(" ")
+              .trim();
+
+            if (joined) {
+              onResult(joined);
+              return;
+            }
+          }
+
+          onDebug?.({ stage: "whisper_empty_final" });
+
         } catch (error) {
           console.error("Whisper API error:", error);
         }
