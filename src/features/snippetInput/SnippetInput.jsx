@@ -151,6 +151,8 @@ const SnippetInput = () => {
 
     useMock: false,
     language: i18n.language,
+    mimeType: selectedMimeType,
+
   });
 
   const handleAdd = async () => {

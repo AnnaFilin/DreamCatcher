@@ -4,6 +4,7 @@ export const useVoiceRecorder = ({
   onResult,
   useMock = false,
   language = "en",
+  mimeType
 }) => {
   const mediaRecorderRef = useRef(null);
   const audioChunksRef = useRef([]);
@@ -23,8 +24,9 @@ export const useVoiceRecorder = ({
       }
 
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream);
-
+      const options = mimeType ? { mimeType } : undefined;
+      const mediaRecorder = new MediaRecorder(stream, options);
+   
       mediaRecorderRef.current = mediaRecorder;
       audioChunksRef.current = [];
 
@@ -35,9 +37,9 @@ export const useVoiceRecorder = ({
       mediaRecorder.onstop = async () => {
         stream.getTracks().forEach((track) => track.stop());
 
-        const audioBlob = new Blob(audioChunksRef.current, {
-          type: "audio/webm",
-        });
+        const actualType = mediaRecorderRef.current?.mimeType || mimeType || "audio/webm";
+        const audioBlob = new Blob(audioChunksRef.current, { type: actualType });
+
         console.log("🎙️ Audio Blob:", audioBlob);
 
         if (audioBlob.size < 2000) {
@@ -46,9 +48,21 @@ export const useVoiceRecorder = ({
         }
 
         const formData = new FormData();
-        formData.append("file", audioBlob, "recording.webm");
+        // formData.append("file", audioBlob, "recording.webm");
+        const t = audioBlob.type || actualType;
+
+        const ext =
+          t.includes("webm") ? "webm" :
+          t.includes("mp4") ? "mp4" :
+          t.includes("ogg") ? "ogg" :
+          "webm";
+
+        formData.append("file", audioBlob, `recording.${ext}`);
         formData.append("model", "whisper-1");
         formData.append("language", language);
+
+        console.log("🎙️ Upload:", { size: audioBlob.size, type: audioBlob.type });
+
 
         try {
           const response = await fetch(`${baseUrl}/whisper`, {
