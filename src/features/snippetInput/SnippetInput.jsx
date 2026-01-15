@@ -29,7 +29,14 @@ const pickMimeType = () => {
   if (typeof window === "undefined" || typeof window.MediaRecorder === "undefined") {
     return "";
   }
-  for (const mime of MIME_OPTIONS) {
+
+  const isAndroid = /Android/i.test(navigator.userAgent);
+
+  const options = isAndroid
+    ? ["audio/webm", "audio/ogg"]
+    : ["audio/mp4", "audio/webm", "audio/ogg"];
+
+  for (const mime of options) {
     if (
       typeof window.MediaRecorder.isTypeSupported !== "function" ||
       window.MediaRecorder.isTypeSupported(mime)
@@ -39,6 +46,7 @@ const pickMimeType = () => {
   }
   return "";
 };
+
 
 const supportsMimeType = (mimeType) => {
   if (!mimeType) {
