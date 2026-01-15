@@ -148,6 +148,13 @@ const SnippetInput = () => {
         toast.warn(t("toasts.transcriptionError"));
       }
     },
+    onDebug: (info) => {
+      setRecorderDiagnostics((prev) => ({
+        ...prev,
+        lastErrorName: info?.stage || prev.lastErrorName,
+        lastErrorMessage: JSON.stringify(info),
+      }));
+    },
 
     useMock: false,
     language: i18n.language,

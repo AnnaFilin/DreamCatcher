@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 
 export const useVoiceRecorder = ({
   onResult,
+  onDebug,
   useMock = false,
   language = "en",
   mimeType
@@ -63,12 +64,25 @@ export const useVoiceRecorder = ({
 
         console.log("🎙️ Upload:", { size: audioBlob.size, type: audioBlob.type });
 
+        onDebug?.({
+          stage: "blob",
+          blobType: audioBlob.type,
+          blobSize: audioBlob.size,
+        });
+        
 
         try {
           const response = await fetch(`${baseUrl}/whisper`, {
             method: "POST",
             body: formData,
           });
+
+          onDebug?.({
+            stage: "response",
+            status: response.status,
+            ok: response.ok,
+          });
+          
 
           const data = await response.json();
           console.log("🔤 Whisper result:", data);
@@ -77,7 +91,9 @@ export const useVoiceRecorder = ({
             console.log("📥 Recognized text:", data.text);
             onResult(data.text);
           } else {
-            alert("❌ Whisper return empty");
+            // alert("❌ Whisper return empty");
+            onDebug?.({ stage: "whisper_empty" });
+alert("❌ Whisper return empty");
           }
         } catch (error) {
           console.error("Whisper API error:", error);
