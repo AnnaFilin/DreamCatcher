@@ -22,7 +22,8 @@ import { useTranslation } from "react-i18next";
 import i18n from "../../i18n/i18n";
 import { validateDreamText, cleanString, LIMITS } from "../../utils/sanitize";
 
-const MIME_OPTIONS = ["audio/webm", "audio/mp4", "audio/ogg"];
+const MIME_OPTIONS = ["audio/mp4", "audio/webm", "audio/ogg"];
+
 
 const pickMimeType = () => {
   if (typeof window === "undefined" || typeof window.MediaRecorder === "undefined") {
