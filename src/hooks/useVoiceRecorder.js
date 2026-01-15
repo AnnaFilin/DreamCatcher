@@ -60,7 +60,11 @@ export const useVoiceRecorder = ({
 
         formData.append("file", audioBlob, `recording.${ext}`);
         formData.append("model", "whisper-1");
-        formData.append("language", language);
+        // formData.append("language", language);
+        const whisperLang = (language || "").toLowerCase().split("-")[0]; // "ru-ru" -> "ru"
+if (whisperLang) {
+  formData.append("language", whisperLang);
+}
 
         console.log("🎙️ Upload:", { size: audioBlob.size, type: audioBlob.type });
 
