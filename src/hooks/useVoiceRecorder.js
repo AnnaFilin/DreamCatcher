@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 
 export const useVoiceRecorder = ({
   onResult,
-  onDebug,
+  // onDebug,
   useMock = false,
   language = "en",
   mimeType
@@ -68,11 +68,11 @@ if (whisperLang) {
 
         console.log("🎙️ Upload:", { size: audioBlob.size, type: audioBlob.type });
 
-        onDebug?.({
-          stage: "blob",
-          blobType: audioBlob.type,
-          blobSize: audioBlob.size,
-        });
+        // onDebug?.({
+        //   stage: "blob",
+        //   blobType: audioBlob.type,
+        //   blobSize: audioBlob.size,
+        // });
         
 
         try {
@@ -81,20 +81,21 @@ if (whisperLang) {
             body: formData,
           });
           
-          onDebug?.({
-            stage: "response",
-            status: response.status,
-            ok: response.ok,
-          });
+          // onDebug?.({
+          //   stage: "response",
+          //   status: response.status,
+          //   ok: response.ok,
+          // });
           
           let data;
           try {
             data = await response.json();
           } catch (e) {
-            onDebug?.({
-              stage: "whisper_json_parse_failed",
-              message: String(e?.message || e),
-            });
+            // onDebug?.({
+            //   stage: "whisper_json_parse_failed",
+            //   message: String(e?.message || e),
+            // });
+            alert("❌ Whisper JSON parse failed");
             return;
           }
           
@@ -107,11 +108,11 @@ if (whisperLang) {
             errorMessage: data?.error?.message || null,
           };
           
-          onDebug?.({
-            stage: "whisper_json",
-            summary,
-            preview: JSON.stringify(data).slice(0, 500),
-          });
+          // onDebug?.({
+          //   stage: "whisper_json",
+          //   summary,
+          //   preview: JSON.stringify(data).slice(0, 500),
+          // });
           
           let finalText = "";
           if (typeof data?.text === "string") {
@@ -122,17 +123,17 @@ if (whisperLang) {
             finalText = data.segments.map((s) => s?.text || "").join(" ").trim();
           }
           
-          onDebug?.({
-            stage: "whisper_parse",
-            finalTextLen: finalText.length,
-          });
+          // onDebug?.({
+          //   stage: "whisper_parse",
+          //   finalTextLen: finalText.length,
+          // });
           
           if (finalText) {
             onResult(finalText);
             return;
           }
           
-          onDebug?.({ stage: "whisper_empty_final" });
+          // onDebug?.({ stage: "whisper_empty_final" });
           
 
         } catch (error) {

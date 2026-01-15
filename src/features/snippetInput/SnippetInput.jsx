@@ -92,7 +92,7 @@ const SnippetInput = () => {
     lastErrorName: "",
     lastErrorMessage: "",
   }));
-  const [debugLog, setDebugLog] = useState([]);
+  // const [debugLog, setDebugLog] = useState([]);
 
 
   const isLargeScreen = useMediaQuery("(min-width: 640px)");
@@ -158,19 +158,19 @@ const SnippetInput = () => {
         toast.warn(t("toasts.transcriptionError"));
       }
     },
-    onDebug: (info) => {
-      setRecorderDiagnostics((prev) => ({
-        ...prev,
-        lastErrorName: info?.stage || prev.lastErrorName,
-        lastErrorMessage: JSON.stringify(info),
-      }));
+    // onDebug: (info) => {
+    //   setRecorderDiagnostics((prev) => ({
+    //     ...prev,
+    //     lastErrorName: info?.stage || prev.lastErrorName,
+    //     lastErrorMessage: JSON.stringify(info),
+    //   }));
     
-      setDebugLog((prev) => {
-        const line = `${new Date().toISOString().slice(11, 19)} ${info?.stage} ${JSON.stringify(info)}`;
-        const next = [...prev, line];
-        return next.slice(-20); // keep last 20 lines
-      });
-    },
+    //   setDebugLog((prev) => {
+    //     const line = `${new Date().toISOString().slice(11, 19)} ${info?.stage} ${JSON.stringify(info)}`;
+    //     const next = [...prev, line];
+    //     return next.slice(-20); // keep last 20 lines
+    //   });
+    // },
     
     
 
@@ -357,14 +357,14 @@ const SnippetInput = () => {
           {recorderDiagnostics.lastErrorMessage && ` — ${recorderDiagnostics.lastErrorMessage}`}
         </div>
       </div>
-      {debugLog.length > 0 && (
+      {/* {debugLog.length > 0 && (
   <div className="mt-3 text-[10px] text-white/60 whitespace-pre-wrap break-words">
     <div className="font-semibold text-white/80 mb-1">Debug log</div>
     {debugLog.map((line, idx) => (
       <div key={idx}>{line}</div>
     ))}
   </div>
-)}
+)} */}
     </div>
   );
 };
