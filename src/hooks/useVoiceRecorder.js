@@ -117,5 +117,5 @@ alert("❌ Whisper return empty");
     }
   };
 
-  return { startRecording, stopRecording, isRecording };
+  return { startRecording, stopRecording, isRecording, onDebug };
 };
