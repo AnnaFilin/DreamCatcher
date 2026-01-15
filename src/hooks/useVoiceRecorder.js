@@ -76,39 +76,60 @@ export const useVoiceRecorder = ({
             method: "POST",
             body: formData,
           });
-
+          
           onDebug?.({
             stage: "response",
             status: response.status,
             ok: response.ok,
           });
           
-
-          const data = await response.json();
-
-          onDebug?.({
-            stage: "whisper_raw",
-            raw: data,
-          });
-
-          if (typeof data?.text === "string" && data.text.trim()) {
-            onResult(data.text);
+          let data;
+          try {
+            data = await response.json();
+          } catch (e) {
+            onDebug?.({
+              stage: "whisper_json_parse_failed",
+              message: String(e?.message || e),
+            });
             return;
           }
-
-          if (Array.isArray(data?.segments) && data.segments.length) {
-            const joined = data.segments
-              .map(s => s.text)
-              .join(" ")
-              .trim();
-
-            if (joined) {
-              onResult(joined);
-              return;
-            }
+          
+          const summary = {
+            keys: data && typeof data === "object" ? Object.keys(data) : [],
+            textLen: typeof data?.text === "string" ? data.text.length : null,
+            segmentsLen: Array.isArray(data?.segments) ? data.segments.length : null,
+            hasError: !!data?.error,
+            errorType: data?.error?.type || null,
+            errorMessage: data?.error?.message || null,
+          };
+          
+          onDebug?.({
+            stage: "whisper_json",
+            summary,
+            preview: JSON.stringify(data).slice(0, 500),
+          });
+          
+          let finalText = "";
+          if (typeof data?.text === "string") {
+            finalText = data.text.trim();
           }
-
+          
+          if (!finalText && Array.isArray(data?.segments) && data.segments.length) {
+            finalText = data.segments.map((s) => s?.text || "").join(" ").trim();
+          }
+          
+          onDebug?.({
+            stage: "whisper_parse",
+            finalTextLen: finalText.length,
+          });
+          
+          if (finalText) {
+            onResult(finalText);
+            return;
+          }
+          
           onDebug?.({ stage: "whisper_empty_final" });
+          
 
         } catch (error) {
           console.error("Whisper API error:", error);
