@@ -93,7 +93,7 @@ export const useVoiceRecorder = ({
           } else {
             // alert("❌ Whisper return empty");
             onDebug?.({ stage: "whisper_empty" });
-alert("❌ Whisper return empty");
+// alert("❌ Whisper return empty");
           }
         } catch (error) {
           console.error("Whisper API error:", error);
@@ -117,5 +117,5 @@ alert("❌ Whisper return empty");
     }
   };
 
-  return { startRecording, stopRecording, isRecording, onDebug };
+  return { startRecording, stopRecording, isRecording };
 };
