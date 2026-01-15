@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 
 export const useVoiceRecorder = ({
   onResult,
-  // onDebug,
   useMock = false,
   language = "en",
   mimeType
@@ -49,7 +48,6 @@ export const useVoiceRecorder = ({
         }
 
         const formData = new FormData();
-        // formData.append("file", audioBlob, "recording.webm");
         const t = audioBlob.type || actualType;
 
         const ext =
@@ -60,41 +58,22 @@ export const useVoiceRecorder = ({
 
         formData.append("file", audioBlob, `recording.${ext}`);
         formData.append("model", "whisper-1");
-        // formData.append("language", language);
-        const whisperLang = (language || "").toLowerCase().split("-")[0]; // "ru-ru" -> "ru"
-if (whisperLang) {
-  formData.append("language", whisperLang);
-}
+        const whisperLang = (language || "").toLowerCase().split("-")[0]; 
+        if (whisperLang) {
+          formData.append("language", whisperLang);
+        }
 
         console.log("🎙️ Upload:", { size: audioBlob.size, type: audioBlob.type });
-
-        // onDebug?.({
-        //   stage: "blob",
-        //   blobType: audioBlob.type,
-        //   blobSize: audioBlob.size,
-        // });
-        
-
         try {
           const response = await fetch(`${baseUrl}/whisper`, {
             method: "POST",
             body: formData,
           });
           
-          // onDebug?.({
-          //   stage: "response",
-          //   status: response.status,
-          //   ok: response.ok,
-          // });
-          
           let data;
           try {
             data = await response.json();
           } catch (e) {
-            // onDebug?.({
-            //   stage: "whisper_json_parse_failed",
-            //   message: String(e?.message || e),
-            // });
             alert("❌ Whisper JSON parse failed");
             return;
           }
@@ -107,13 +86,7 @@ if (whisperLang) {
             errorType: data?.error?.type || null,
             errorMessage: data?.error?.message || null,
           };
-          
-          // onDebug?.({
-          //   stage: "whisper_json",
-          //   summary,
-          //   preview: JSON.stringify(data).slice(0, 500),
-          // });
-          
+    
           let finalText = "";
           if (typeof data?.text === "string") {
             finalText = data.text.trim();
@@ -123,19 +96,10 @@ if (whisperLang) {
             finalText = data.segments.map((s) => s?.text || "").join(" ").trim();
           }
           
-          // onDebug?.({
-          //   stage: "whisper_parse",
-          //   finalTextLen: finalText.length,
-          // });
-          
           if (finalText) {
             onResult(finalText);
             return;
           }
-          
-          // onDebug?.({ stage: "whisper_empty_final" });
-          
-
         } catch (error) {
           console.error("Whisper API error:", error);
         }

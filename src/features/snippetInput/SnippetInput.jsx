@@ -22,8 +22,6 @@ import { useTranslation } from "react-i18next";
 import i18n from "../../i18n/i18n";
 import { validateDreamText, cleanString, LIMITS } from "../../utils/sanitize";
 
-const MIME_OPTIONS = ["audio/mp4", "audio/webm", "audio/ogg"];
-
 
 const pickMimeType = () => {
   if (typeof window === "undefined" || typeof window.MediaRecorder === "undefined") {
@@ -92,8 +90,6 @@ const SnippetInput = () => {
     lastErrorName: "",
     lastErrorMessage: "",
   }));
-  // const [debugLog, setDebugLog] = useState([]);
-
 
   const isLargeScreen = useMediaQuery("(min-width: 640px)");
 
@@ -158,22 +154,6 @@ const SnippetInput = () => {
         toast.warn(t("toasts.transcriptionError"));
       }
     },
-    // onDebug: (info) => {
-    //   setRecorderDiagnostics((prev) => ({
-    //     ...prev,
-    //     lastErrorName: info?.stage || prev.lastErrorName,
-    //     lastErrorMessage: JSON.stringify(info),
-    //   }));
-    
-    //   setDebugLog((prev) => {
-    //     const line = `${new Date().toISOString().slice(11, 19)} ${info?.stage} ${JSON.stringify(info)}`;
-    //     const next = [...prev, line];
-    //     return next.slice(-20); // keep last 20 lines
-    //   });
-    // },
-    
-    
-
     useMock: false,
     language: i18n.language,
     mimeType: selectedMimeType,
@@ -334,37 +314,6 @@ const SnippetInput = () => {
         </div>
       )}
 
-      <div className="mt-3 text-[11px] text-white/60 space-y-1">
-        <div>
-          <span className="font-semibold text-white/80">getUserMedia</span>:{" "}
-          {recorderDiagnostics.userMediaSupported ? "available" : "missing"}
-        </div>
-        <div>
-          <span className="font-semibold text-white/80">Permission</span>: {permissionState}
-        </div>
-        <div>
-          <span className="font-semibold text-white/80">MediaRecorder</span>:{" "}
-          {recorderDiagnostics.mediaRecorderSupported ? "supported" : "missing"}
-        </div>
-        <div>
-          <span className="font-semibold text-white/80">Selected mimeType</span>:{" "}
-          {recorderDiagnostics.selectedMimeType} (
-          {recorderDiagnostics.isMimeTypeSupported ? "supported" : "unsupported"})
-        </div>
-        <div>
-          <span className="font-semibold text-white/80">Error</span>:{" "}
-          {recorderDiagnostics.lastErrorName || "none"}
-          {recorderDiagnostics.lastErrorMessage && ` — ${recorderDiagnostics.lastErrorMessage}`}
-        </div>
-      </div>
-      {/* {debugLog.length > 0 && (
-  <div className="mt-3 text-[10px] text-white/60 whitespace-pre-wrap break-words">
-    <div className="font-semibold text-white/80 mb-1">Debug log</div>
-    {debugLog.map((line, idx) => (
-      <div key={idx}>{line}</div>
-    ))}
-  </div>
-)} */}
     </div>
   );
 };
