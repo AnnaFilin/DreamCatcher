@@ -1,11 +1,16 @@
+
 import { useTranslation } from "react-i18next";
 import {
   themeFonts,
   themeColors,
   themeSpacing,
   themeEffects,
+  audioMobileLabel,
 } from "../../utils/themeTokens";
 import { MicIcon } from "../icons/MicIcon";
+
+const MOBILE_LABEL_CLASS =
+  "sm:hidden text-lg font-semibold tracking-[0.3em] pl-5 pr-4 py-2 uppercase text-white/70 leading-none min-h-[44px]";
 
 const ButtonStart = ({ onClick, variant }) => {
   const { t } = useTranslation();
@@ -21,7 +26,8 @@ const ButtonStart = ({ onClick, variant }) => {
           ${themeEffects.iconButton.active}
         `}
       >
-        <MicIcon className="w-8 h-8 sm:w-9 sm:h-9 opacity-60 group-hover:opacity-90 group-active:opacity-100 transition-opacity duration-200 stroke-[1.4]" />
+      <span className={audioMobileLabel}>REC</span>
+
       </button>
     );
   }
@@ -30,6 +36,7 @@ const ButtonStart = ({ onClick, variant }) => {
     <button
       type="button"
       onClick={onClick}
+      data-variant={variant || "undefined"}
       className={`
         flex items-center gap-2
         ${themeFonts.tag}
@@ -47,3 +54,4 @@ const ButtonStart = ({ onClick, variant }) => {
 };
 
 export default ButtonStart;
+

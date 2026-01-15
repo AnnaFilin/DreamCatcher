@@ -248,6 +248,16 @@ const SnippetInput = () => {
       ${themeEffects.input.focus} 
     `}
         />
+         {isRecording && !isProcessingAudio && (
+        <div className="absolute top-3 right-4 flex items-center gap-2 text-xs uppercase tracking-[0.5em] text-white/70 pointer-events-none">
+          <span className="font-semibold text-white">REC</span>
+          <span className="flex items-center gap-1">
+            <span className="h-1.5 w-1.5 rounded-full bg-white/70 animate-pulse" />
+            <span className="h-1.5 w-1.5 rounded-full bg-white/60 animate-pulse animation-delay-150" />
+            <span className="h-1.5 w-1.5 rounded-full bg-white/50 animate-pulse animation-delay-300" />
+          </span>
+        </div>
+      )}
 
         {isProcessingAudio && (
           <div className="absolute inset-0 flex items-center justify-center  z-10 pointer-events-none">
@@ -261,18 +271,22 @@ const SnippetInput = () => {
 
       {/* Mobile layout */}
       <div className="flex flex-col gap-4 sm:hidden mt-4">
-        <div className="flex items-center justify-between gap-12 w-full">
-          {!isRecording ? (
-            <ButtonStart onClick={handleStartRecording} variant="icon" />
-          ) : (
-            <ButtonStop onClick={handleStopRecording} isRecording={isRecording} variant="icon" />
-          )}
-          <LucidVividnessControls
-            isLucid={isLucid}
-            setIsLucid={setIsLucid}
-            vividness={vividness}
-            setVividness={setVividness}
-          />
+        <div className="flex items-center gap-12 w-full">
+          <div className="flex-1 flex items-center">
+            <LucidVividnessControls
+              isLucid={isLucid}
+              setIsLucid={setIsLucid}
+              vividness={vividness}
+              setVividness={setVividness}
+            />
+          </div>
+          <div className="flex-none w-20 flex items-center justify-end">
+            {!isRecording ? (
+              <ButtonStart onClick={handleStartRecording} variant="icon" />
+            ) : (
+              <ButtonStop onClick={handleStopRecording} isRecording={isRecording} variant="icon" />
+            )}
+          </div>
         </div>
 
         {isSaving ? (

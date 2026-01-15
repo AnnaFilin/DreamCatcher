@@ -14,21 +14,21 @@
   "recent_dreams.link": "Посмотреть все сны →",
   "total_counter.label": "Всего сохранено: {{count}} снов",
   "dream_input.placeholder": "Запишите свой сон...",
-
   "buttons.save": "Сохранить",
   "buttons.record": "Запись",
   "buttons.stop": "Стоп",
   "buttons.generate": "Сгенерировать интерпретацию",
   "buttons.showInterpretations": "Показать {{count}} интерпретацию",
   "buttons.showInterpretations_plural": "Показать {{count}} интерпретации",
+  "buttons.hideInterpretations": "Скрыть интерпретации",
   "filters.show": "Показать фильтры",
   "filters.hide": "Скрыть фильтры",
   "filters.reset": "Сбросить",
   "input.placeholder": "Запишите ваш сон...",
   "input.vividness": "Выберите яркость сна",
+  "input.vividness_short": "Яркость сна",
   "input.lucid": "Осознанный?",
   "search.placeholder": "Поиск...",
-
   "buttons.sign_in": "Войти",
   "buttons.sign_up": "Регистрация",
   "buttons.sign_out": "Выйти",
@@ -43,7 +43,6 @@
   "language.en": "EN",
   "language.ru": "RU",
   "language.he": "HE",
-
   "labels.interpretation": "Интерпретация",
   "about": {
     "title": "Dreamcatcher",
@@ -60,14 +59,17 @@
     "search": "Поиск..."
   },
   "anonymous": "Аноним",
-
+  "user": {
+    "anonymous": "Аноним"
+  },
   "toasts": {
     "interpretationSaved": "Интерпретация сохранена.",
     "interpretationError": "Не удалось сгенерировать интерпретацию.",
     "transcriptionError": "⚠️ Не удалось обработать расшифровку. Попробуйте ещё раз.",
     "dreamEmpty": "Текст сна пуст.",
     "dreamSaved": "Сон успешно сохранён.",
-    "dreamSaveError": "Не удалось сохранить сон."
+    "dreamSaveError": "Не удалось сохранить сон.",
+    "dreamTooLong": "Сон слишком длинный."
   },
   "loading": {
     "transcribing": "Обработка аудио..."

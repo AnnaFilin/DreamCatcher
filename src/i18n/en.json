@@ -70,7 +70,8 @@
     "transcriptionError": "⚠️ The transcription couldn't be processed. Please try again.",
     "dreamEmpty": "Dream text is empty.",
     "dreamSaved": "Dream saved successfully.",
-    "dreamSaveError": "Failed to save the dream."
+    "dreamSaveError": "Failed to save the dream.",
+    "dreamTooLong": "Dream text is too long."
   },
   "loading": {
     "transcribing": "Transcribing audio..."

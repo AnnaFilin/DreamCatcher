@@ -4,6 +4,7 @@ import {
   themeColors,
   themeSpacing,
   themeEffects,
+  audioMobileLabel,
 } from "../../utils/themeTokens";
 import { MicIcon } from "../icons/MicIcon";
 
@@ -15,22 +16,14 @@ const ButtonStop = ({ onClick, variant, isRecording }) => {
       <button
         onClick={onClick}
         className={`
-          flex items-center justify-center w-9 h-9 sm:hidden
+              group
+          flex items-center justify-center sm:hidden
           ${themeEffects.iconButton.base}
           ${themeEffects.iconButton.hover}
           ${themeEffects.iconButton.active}
         `}
       >
-        <MicIcon
-          className={`
-    w-7 h-7 stroke-[1.4] transition-all duration-700 ease-in-out
-    ${
-      isRecording
-        ? "text-white/90 drop-shadow-[0_0_12px_rgba(255,255,255,0.6)] animate-pulse"
-        : "text-white/60"
-    }
-  `}
-        />
+                <span className={audioMobileLabel}>STOP</span>
       </button>
     );
   }
@@ -47,17 +40,17 @@ const ButtonStop = ({ onClick, variant, isRecording }) => {
         ${themeEffects.button.base}
         ${themeEffects.button.hover}
         ${themeEffects.button.active}
-        `}
+      `}
     >
       <MicIcon
         className={`
-    w-5 h-5 stroke-[1.4] transition-all duration-700 ease-in-out
-    ${
-      isRecording
-        ? "text-white/90 drop-shadow-[0_0_12px_rgba(255,255,255,0.6)] animate-pulse"
-        : "text-white/60"
-    }
-  `}
+          w-5 h-5 stroke-[1.4] transition-all duration-700 ease-in-out
+          ${
+            isRecording
+              ? "text-white/90 drop-shadow-[0_0_12px_rgba(255,255,255,0.6)] animate-pulse"
+              : "text-white/60"
+          }
+        `}
       />
       {t("buttons.stop")}
     </button>

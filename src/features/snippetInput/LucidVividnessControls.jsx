@@ -80,9 +80,11 @@ export default function LucidVividnessControls({
           ))}
         </div>
 
+       
         <span className={`md:hidden mt-1 ${themeFonts.controlLabelMobile}`}>
-          {t("input.vividness")}
-        </span>
+  {t("input.vividness_short", { defaultValue: t("input.vividness") })}
+</span>
+
         <span className={`hidden md:inline mt-1 ${themeFonts.controlLabel}`}>
           {t("input.vividness")}
         </span>

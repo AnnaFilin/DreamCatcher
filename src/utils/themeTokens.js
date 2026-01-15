@@ -40,6 +40,9 @@ export const themeEffects = {
     "hover:shadow-[0_2px_25px_rgba(255,255,255,0.15)]",
 };
 
+export const audioMobileLabel =
+  "sm:hidden text-lg font-semibold tracking-[0.3em] pl-5 pr-4 py-2 uppercase text-white/70 leading-none min-h-[44px]";
+
 export const themeFonts = {
   logo: `
   text-4xl font-nato font-extralight uppercase tracking-tight
